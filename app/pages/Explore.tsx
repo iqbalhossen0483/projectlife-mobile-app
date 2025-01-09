@@ -7,7 +7,7 @@ import { Iconify } from "@/components/utils/Iconify.android";
 import ParallaxScrollView from "@/components/utils/ParallaxScrollView";
 import { Typografy } from "@/components/utils/Typografy";
 
-export default function TabTwoScreen() {
+export default function ExploreScreen() {
   return (
     <ParallaxScrollView
       headerBackgroundColor={{ light: "#D0D0D0", dark: "#353636" }}
