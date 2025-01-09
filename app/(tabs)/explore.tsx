@@ -1,93 +1,108 @@
-import { StyleSheet, Image, Platform } from 'react-native';
+import { Image, Platform, StyleSheet } from "react-native";
 
-import { Collapsible } from '@/components/Collapsible';
-import { ExternalLink } from '@/components/ExternalLink';
-import ParallaxScrollView from '@/components/ParallaxScrollView';
-import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
-import { IconSymbol } from '@/components/ui/IconSymbol';
+import { Box } from "@/components/utils/Box";
+import { Collapsible } from "@/components/utils/Collapsible";
+import { ExternalLink } from "@/components/utils/ExternalLink";
+import { Iconify } from "@/components/utils/Iconify.android";
+import ParallaxScrollView from "@/components/utils/ParallaxScrollView";
+import { Typografy } from "@/components/utils/Typografy";
 
 export default function TabTwoScreen() {
   return (
     <ParallaxScrollView
-      headerBackgroundColor={{ light: '#D0D0D0', dark: '#353636' }}
+      headerBackgroundColor={{ light: "#D0D0D0", dark: "#353636" }}
       headerImage={
-        <IconSymbol
+        <Iconify
           size={310}
-          color="#808080"
-          name="chevron.left.forwardslash.chevron.right"
+          color='#808080'
+          name='chevron.left.forwardslash.chevron.right'
           style={styles.headerImage}
         />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Explore</ThemedText>
-      </ThemedView>
-      <ThemedText>This app includes example code to help you get started.</ThemedText>
-      <Collapsible title="File-based routing">
-        <ThemedText>
-          This app has two screens:{' '}
-          <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> and{' '}
-          <ThemedText type="defaultSemiBold">app/(tabs)/explore.tsx</ThemedText>
-        </ThemedText>
-        <ThemedText>
-          The layout file in <ThemedText type="defaultSemiBold">app/(tabs)/_layout.tsx</ThemedText>{' '}
+      }
+    >
+      <Box style={styles.titleContainer}>
+        <Typografy type='title'>Explore</Typografy>
+      </Box>
+      <Typografy>
+        This app includes example code to help you get started.
+      </Typografy>
+      <Collapsible title='File-based routing'>
+        <Typografy>
+          This app has two screens:{" "}
+          <Typografy type='defaultSemiBold'>app/(tabs)/index.tsx</Typografy> and{" "}
+          <Typografy type='defaultSemiBold'>app/(tabs)/explore.tsx</Typografy>
+        </Typografy>
+        <Typografy>
+          The layout file in{" "}
+          <Typografy type='defaultSemiBold'>app/(tabs)/_layout.tsx</Typografy>{" "}
           sets up the tab navigator.
-        </ThemedText>
-        <ExternalLink href="https://docs.expo.dev/router/introduction">
-          <ThemedText type="link">Learn more</ThemedText>
+        </Typografy>
+        <ExternalLink href='https://docs.expo.dev/router/introduction'>
+          <Typografy type='link'>Learn more</Typografy>
         </ExternalLink>
       </Collapsible>
-      <Collapsible title="Android, iOS, and web support">
-        <ThemedText>
-          You can open this project on Android, iOS, and the web. To open the web version, press{' '}
-          <ThemedText type="defaultSemiBold">w</ThemedText> in the terminal running this project.
-        </ThemedText>
+      <Collapsible title='Android, iOS, and web support'>
+        <Typografy>
+          You can open this project on Android, iOS, and the web. To open the
+          web version, press <Typografy type='defaultSemiBold'>w</Typografy> in
+          the terminal running this project.
+        </Typografy>
       </Collapsible>
-      <Collapsible title="Images">
-        <ThemedText>
-          For static images, you can use the <ThemedText type="defaultSemiBold">@2x</ThemedText> and{' '}
-          <ThemedText type="defaultSemiBold">@3x</ThemedText> suffixes to provide files for
-          different screen densities
-        </ThemedText>
-        <Image source={require('@/assets/images/react-logo.png')} style={{ alignSelf: 'center' }} />
-        <ExternalLink href="https://reactnative.dev/docs/images">
-          <ThemedText type="link">Learn more</ThemedText>
+      <Collapsible title='Images'>
+        <Typografy>
+          For static images, you can use the{" "}
+          <Typografy type='defaultSemiBold'>@2x</Typografy> and{" "}
+          <Typografy type='defaultSemiBold'>@3x</Typografy> suffixes to provide
+          files for different screen densities
+        </Typografy>
+        <Image
+          source={require("@/assets/images/react-logo.png")}
+          style={{ alignSelf: "center" }}
+        />
+        <ExternalLink href='https://reactnative.dev/docs/images'>
+          <Typografy type='link'>Learn more</Typografy>
         </ExternalLink>
       </Collapsible>
-      <Collapsible title="Custom fonts">
-        <ThemedText>
-          Open <ThemedText type="defaultSemiBold">app/_layout.tsx</ThemedText> to see how to load{' '}
-          <ThemedText style={{ fontFamily: 'SpaceMono' }}>
+      <Collapsible title='Custom fonts'>
+        <Typografy>
+          Open <Typografy type='defaultSemiBold'>app/_layout.tsx</Typografy> to
+          see how to load{" "}
+          <Typografy style={{ fontFamily: "SpaceMono" }}>
             custom fonts such as this one.
-          </ThemedText>
-        </ThemedText>
-        <ExternalLink href="https://docs.expo.dev/versions/latest/sdk/font">
-          <ThemedText type="link">Learn more</ThemedText>
+          </Typografy>
+        </Typografy>
+        <ExternalLink href='https://docs.expo.dev/versions/latest/sdk/font'>
+          <Typografy type='link'>Learn more</Typografy>
         </ExternalLink>
       </Collapsible>
-      <Collapsible title="Light and dark mode components">
-        <ThemedText>
-          This template has light and dark mode support. The{' '}
-          <ThemedText type="defaultSemiBold">useColorScheme()</ThemedText> hook lets you inspect
-          what the user's current color scheme is, and so you can adjust UI colors accordingly.
-        </ThemedText>
-        <ExternalLink href="https://docs.expo.dev/develop/user-interface/color-themes/">
-          <ThemedText type="link">Learn more</ThemedText>
+      <Collapsible title='Light and dark mode components'>
+        <Typografy>
+          This template has light and dark mode support. The{" "}
+          <Typografy type='defaultSemiBold'>useColorScheme()</Typografy> hook
+          lets you inspect what the user's current color scheme is, and so you
+          can adjust UI colors accordingly.
+        </Typografy>
+        <ExternalLink href='https://docs.expo.dev/develop/user-interface/color-themes/'>
+          <Typografy type='link'>Learn more</Typografy>
         </ExternalLink>
       </Collapsible>
-      <Collapsible title="Animations">
-        <ThemedText>
-          This template includes an example of an animated component. The{' '}
-          <ThemedText type="defaultSemiBold">components/HelloWave.tsx</ThemedText> component uses
-          the powerful <ThemedText type="defaultSemiBold">react-native-reanimated</ThemedText>{' '}
+      <Collapsible title='Animations'>
+        <Typografy>
+          This template includes an example of an animated component. The{" "}
+          <Typografy type='defaultSemiBold'>components/HelloWave.tsx</Typografy>{" "}
+          component uses the powerful{" "}
+          <Typografy type='defaultSemiBold'>react-native-reanimated</Typografy>{" "}
           library to create a waving hand animation.
-        </ThemedText>
+        </Typografy>
         {Platform.select({
           ios: (
-            <ThemedText>
-              The <ThemedText type="defaultSemiBold">components/ParallaxScrollView.tsx</ThemedText>{' '}
+            <Typografy>
+              The{" "}
+              <Typografy type='defaultSemiBold'>
+                components/ParallaxScrollView.tsx
+              </Typografy>{" "}
               component provides a parallax effect for the header image.
-            </ThemedText>
+            </Typografy>
           ),
         })}
       </Collapsible>
@@ -97,13 +112,13 @@ export default function TabTwoScreen() {
 
 const styles = StyleSheet.create({
   headerImage: {
-    color: '#808080',
+    color: "#808080",
     bottom: -90,
     left: -35,
-    position: 'absolute',
+    position: "absolute",
   },
   titleContainer: {
-    flexDirection: 'row',
+    flexDirection: "row",
     gap: 8,
   },
 });
