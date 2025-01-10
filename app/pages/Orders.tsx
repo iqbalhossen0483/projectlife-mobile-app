@@ -2,19 +2,22 @@ import React from "react";
 import { StyleSheet } from "react-native";
 
 import { Box } from "@/components/utils/Box";
-import Link from "@/components/utils/Link";
+import Button from "@/components/utils/Button";
 import { Typography } from "@/components/utils/Typography";
 
-export default function NotFoundScreen() {
+const Orders = () => {
   return (
     <Box style={styles.container}>
-      <Typography type='title'>This screen doesn't exist.</Typography>
-      <Link href='Home' style={styles.link}>
-        <Typography type='link'>Go to home screen!</Typography>
-      </Link>
+      <Typography type='title'>This is Order page</Typography>
+      <Typography>Order 1</Typography>
+      <Box>
+        <Button href='HomeLayout' style={styles.link}>
+          <Typography>Home</Typography>
+        </Button>
+      </Box>
     </Box>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -28,3 +31,5 @@ const styles = StyleSheet.create({
     paddingVertical: 15,
   },
 });
+
+export default Orders;
