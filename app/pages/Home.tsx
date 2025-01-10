@@ -3,7 +3,7 @@ import { Image, Platform, StyleSheet } from "react-native";
 import { Box } from "@/components/utils/Box";
 import { HelloWave } from "@/components/utils/HelloWave";
 import ParallaxScrollView from "@/components/utils/ParallaxScrollView";
-import { Typografy } from "@/components/utils/Typografy";
+import { Typography } from "@/components/utils/Typography";
 
 export default function HomeScreen() {
   return (
@@ -17,42 +17,42 @@ export default function HomeScreen() {
       }
     >
       <Box style={styles.titleContainer}>
-        <Typografy type='title'>Welcome!</Typografy>
+        <Typography type='title'>Welcome!</Typography>
         <HelloWave />
       </Box>
       <Box style={styles.stepContainer}>
-        <Typografy type='subtitle'>Step 1: Try it</Typografy>
-        <Typografy>
+        <Typography type='subtitle'>Step 1: Try it</Typography>
+        <Typography>
           Edit{" "}
-          <Typografy type='defaultSemiBold'>app/(tabs)/index.tsx</Typografy> to
-          see changes. Press{" "}
-          <Typografy type='defaultSemiBold'>
+          <Typography type='defaultSemiBold'>app/(tabs)/index.tsx</Typography>{" "}
+          to see changes. Press{" "}
+          <Typography type='defaultSemiBold'>
             {Platform.select({
               ios: "cmd + d",
               android: "cmd + m",
               web: "F12",
             })}
-          </Typografy>{" "}
+          </Typography>{" "}
           to open developer tools.
-        </Typografy>
+        </Typography>
       </Box>
       <Box style={styles.stepContainer}>
-        <Typografy type='subtitle'>Step 2: Explore</Typografy>
-        <Typografy>
+        <Typography type='subtitle'>Step 2: Explore</Typography>
+        <Typography>
           Tap the Explore tab to learn more about what's included in this
           starter app.
-        </Typografy>
+        </Typography>
       </Box>
       <Box style={styles.stepContainer}>
-        <Typografy type='subtitle'>Step 3: Get a fresh start</Typografy>
-        <Typografy>
+        <Typography type='subtitle'>Step 3: Get a fresh start</Typography>
+        <Typography>
           When you're ready, run{" "}
-          <Typografy type='defaultSemiBold'>npm run reset-project</Typografy> to
-          get a fresh <Typografy type='defaultSemiBold'>app</Typografy>{" "}
+          <Typography type='defaultSemiBold'>npm run reset-project</Typography>{" "}
+          to get a fresh <Typography type='defaultSemiBold'>app</Typography>{" "}
           directory. This will move the current{" "}
-          <Typografy type='defaultSemiBold'>app</Typografy> to{" "}
-          <Typografy type='defaultSemiBold'>app-example</Typografy>.
-        </Typografy>
+          <Typography type='defaultSemiBold'>app</Typography> to{" "}
+          <Typography type='defaultSemiBold'>app-example</Typography>.
+        </Typography>
       </Box>
     </ParallaxScrollView>
   );

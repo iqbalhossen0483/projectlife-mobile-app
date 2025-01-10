@@ -1,10 +1,12 @@
 import * as React from "react";
 import renderer from "react-test-renderer";
 
-import { Typografy } from "../utils/Typografy";
+import { Typography } from "../utils/Typography";
 
 it(`renders correctly`, () => {
-  const tree = renderer.create(<Typografy>Snapshot test!</Typografy>).toJSON();
+  const tree = renderer
+    .create(<Typography>Snapshot test!</Typography>)
+    .toJSON();
 
   expect(tree).toMatchSnapshot();
 });

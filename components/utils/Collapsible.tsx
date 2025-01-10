@@ -3,7 +3,7 @@ import { StyleSheet, TouchableOpacity } from "react-native";
 
 import { Box } from "@/components/utils/Box";
 import { Iconify } from "@/components/utils/Iconify.android";
-import { Typografy } from "@/components/utils/Typografy";
+import { Typography } from "@/components/utils/Typography";
 import { Colors } from "@/constants/Colors";
 import { useColorScheme } from "@/hooks/useColorScheme";
 
@@ -29,7 +29,7 @@ export function Collapsible({
           style={{ transform: [{ rotate: isOpen ? "90deg" : "0deg" }] }}
         />
 
-        <Typografy type='defaultSemiBold'>{title}</Typografy>
+        <Typography type='defaultSemiBold'>{title}</Typography>
       </TouchableOpacity>
       {isOpen && <Box style={styles.content}>{children}</Box>}
     </Box>

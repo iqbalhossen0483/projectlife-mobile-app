@@ -8,7 +8,7 @@ import Animated, {
   withTiming,
 } from "react-native-reanimated";
 
-import { Typografy } from "@/components/utils/Typografy";
+import { Typography } from "@/components/utils/Typography";
 
 export function HelloWave() {
   const rotationAnimation = useSharedValue(0);
@@ -29,7 +29,7 @@ export function HelloWave() {
 
   return (
     <Animated.View style={animatedStyle}>
-      <Typografy style={styles.text}>👋</Typografy>
+      <Typography style={styles.text}>👋</Typography>
     </Animated.View>
   );
 }

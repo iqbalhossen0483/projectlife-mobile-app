@@ -3,14 +3,14 @@ import { StyleSheet } from "react-native";
 
 import { Box } from "@/components/utils/Box";
 import Link from "@/components/utils/Link";
-import { Typografy } from "@/components/utils/Typografy";
+import { Typography } from "@/components/utils/Typography";
 
 export default function NotFoundScreen() {
   return (
     <Box style={styles.container}>
-      <Typografy type='title'>This screen doesn't exist.</Typografy>
+      <Typography type='title'>This screen doesn't exist.</Typography>
       <Link href='Home' style={styles.link}>
-        <Typografy type='link'>Go to home screen!</Typografy>
+        <Typography type='link'>Go to home screen!</Typography>
       </Link>
     </Box>
   );
