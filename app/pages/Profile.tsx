@@ -10,11 +10,14 @@ const Profile = () => {
     <Box style={styles.container}>
       <Typography type='title'>This is Profile page</Typography>
       <Typography>Name: Md Iqbal Hossen</Typography>
-      <Box>
-        <Button href='HomeLayout' style={styles.link}>
+      <Box style={{ gap: 10, marginTop: 10 }}>
+        <Button variant='containd' href='HomeLayout'>
           <Typography>Home</Typography>
         </Button>
-        <Button href='Order' style={styles.link}>
+        <Button variant='outline'>
+          <Typography>Order</Typography>
+        </Button>
+        <Button variant='text' ripple={false}>
           <Typography>Order</Typography>
         </Button>
       </Box>

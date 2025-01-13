@@ -15,11 +15,14 @@ interface RippleButtonProps {
   style?: ViewStyle;
   href?: string;
   onPress?: () => void;
+  variant?: "containd" | "outline" | "text";
+  ripple?: boolean;
 }
 
 type Button = React.FC<RippleButtonProps>;
 
-const RippleButton: Button = ({ children, href, style, onPress }) => {
+const RippleButton: Button = (props) => {
+  const { children, href, style, onPress, variant, ripple = true } = props;
   const scaleValue = new Animated.Value(0);
   const backgroundColor = useThemeColor("primary");
   const navigation = useNavigation<NavigationProp<string>>();
@@ -54,13 +57,27 @@ const RippleButton: Button = ({ children, href, style, onPress }) => {
     }
   };
 
+  const rippleConfig = ripple
+    ? {
+        onPressIn: handlePressIn,
+        onPressOut: handlePressOut,
+        android_ripple: { color: lighterColor, radius: 100 },
+      }
+    : {};
+
   return (
     <Pressable
-      onPressIn={handlePressIn}
-      onPressOut={handlePressOut}
-      android_ripple={{ color: lighterColor, radius: 100 }}
+      {...rippleConfig}
       onPress={handlePress}
-      style={[styles.button, { backgroundColor }, style]}
+      style={[
+        styles.button,
+        variant === "outline"
+          ? { borderColor: backgroundColor, borderWidth: 1 }
+          : variant === "text"
+          ? {}
+          : { backgroundColor },
+        style,
+      ]}
     >
       {Platform.OS === "ios" && (
         <Animated.View

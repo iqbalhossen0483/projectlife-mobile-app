@@ -49,10 +49,7 @@ const HomeLayout = () => {
     },
 
     tabBarIndicatorStyle: {
-      backgroundColor:
-        colorScheme === "dark"
-          ? Colors.light.background
-          : Colors.dark.background,
+      backgroundColor: colorScheme === "dark" ? "#f3f3f3" : "#333",
     },
     tabBarLabel: ({ focused }) => {
       let iconName: string;

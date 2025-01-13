@@ -10,6 +10,7 @@ import "react-native-reanimated";
 
 import { useColorScheme } from "@/hooks/useColorScheme";
 
+import { ThemedToast } from "@/components/provider/ThemeToast";
 import { createStackNavigator } from "@react-navigation/stack";
 import { StatusBar } from "expo-status-bar";
 import { SafeAreaView } from "react-native";
@@ -52,6 +53,7 @@ export default function RootLayout() {
           <Stack.Screen name='Profile' component={Profile} />
           <Stack.Screen name='Order' component={Orders} />
         </Stack.Navigator>
+        <ThemedToast />
       </SafeAreaView>
     </ThemeProvider>
   );
