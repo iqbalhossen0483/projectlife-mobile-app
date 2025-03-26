@@ -3,14 +3,14 @@ import React from "react";
 import { StyleSheet, TextInput, TextInputProps, View } from "react-native";
 
 type InputBoxProps = TextInputProps & {
-  width?: number;
+  width?: number | "auto";
   placeholder?: string;
   value: string;
   onChangeText: (value: string) => void;
 };
 
 const InputBox = ({
-  width = 200,
+  width = "auto",
   style,
   value,
   onChangeText,
@@ -23,7 +23,7 @@ const InputBox = ({
   const borderColor = useThemeColor("border");
 
   return (
-    <View style={[styles.container, { width }]}>
+    <View style={{ width }}>
       <TextInput
         placeholder={placeholder || "Enter your text"}
         value={value}
@@ -45,11 +45,8 @@ const InputBox = ({
 };
 
 const styles = StyleSheet.create({
-  container: {
-    marginVertical: 10,
-  },
   input: {
-    height: 50,
+    height: 45,
     paddingHorizontal: 15,
     borderWidth: 1,
     borderRadius: 8,

@@ -1,6 +1,7 @@
 import { useThemeColor } from "@/hooks/useThemeColor";
 import React, { useState } from "react";
-import { View } from "react-native";
+import { View, ViewStyle } from "react-native";
+import { Box } from "./Box";
 import RippleButton from "./Button";
 import DropDown from "./Dropdown";
 import InputBox from "./InputBox";
@@ -8,21 +9,25 @@ import { Typography } from "./Typography";
 
 type FormInput = {
   name: string;
+  label: string;
   placeholder: string;
   value?: string;
   secureTextEntry?: boolean;
   error?: string;
   required?: boolean;
-  options?: { label: string; value: string }[]; // Add options for dropdowns
+  options?: { label: string; value: string }[];
+  JSXElement?: React.JSX.Element;
 };
 
 type FormProps = {
   inputs: FormInput[];
   onSubmit: (formData: Record<string, string>) => void;
   title?: string;
+  butnText?: string;
+  style?: ViewStyle;
 };
 
-const Form = ({ inputs, onSubmit, title }: FormProps) => {
+const Form = ({ inputs, onSubmit, title, butnText, style }: FormProps) => {
   const [formData, setFormData] = useState<Record<string, string>>(() => {
     const initialData: Record<string, string> = {};
     inputs.forEach((input) => {
@@ -48,7 +53,7 @@ const Form = ({ inputs, onSubmit, title }: FormProps) => {
 
     inputs.forEach((input) => {
       if (input.required && !formData[input.name]) {
-        newErrors[input.name] = `${input.placeholder} is required`;
+        newErrors[input.name] = `${input.label} is required`;
       }
     });
 
@@ -64,46 +69,55 @@ const Form = ({ inputs, onSubmit, title }: FormProps) => {
   };
 
   return (
-    <View
-      style={{
-        borderColor,
-        borderWidth: 1,
-        padding: 20,
-        borderRadius: 10,
-      }}
-    >
-      <Typography type='subtitle'>{title}</Typography>
-      {inputs.map((input) => (
-        <View key={input.name}>
-          {input.options ? (
-            <DropDown
-              data={input.options}
-              placeholder={input.placeholder}
-              setData={(value) => handleChange(input.name, value)}
-            />
-          ) : (
-            <InputBox
-              style={{
-                borderColor: errors[input.name] ? errorColor : borderColor,
-              }}
-              placeholder={input.placeholder}
-              placeholderTextColor={placeholderColor}
-              secureTextEntry={input.secureTextEntry}
-              value={formData[input.name]}
-              onChangeText={(value) => handleChange(input.name, value)}
-            />
-          )}
-          {errors[input.name] && (
-            <Typography style={{ color: errorColor, fontSize: 12 }}>
-              {errors[input.name]}
+    <Box style={style}>
+      <Typography style={{ marginBottom: 30 }} color='primary' type='subtitle'>
+        {title}
+      </Typography>
+      <Box style={{ rowGap: 15 }}>
+        {inputs.map((input) => (
+          <View key={input.name}>
+            <Typography style={{ fontWeight: 500, marginBottom: 3 }}>
+              {input.label}
             </Typography>
-          )}
-        </View>
-      ))}
-      <RippleButton style={{ marginTop: 10 }} onPress={handleSubmit}>
-        <Typography>Submit</Typography>
-      </RippleButton>
-    </View>
+            {input.options ? (
+              <DropDown
+                data={input.options}
+                placeholder={input.placeholder}
+                setData={(value) => handleChange(input.name, value)}
+              />
+            ) : (
+              <Box style={{ position: "relative" }}>
+                <InputBox
+                  style={{
+                    borderColor: errors[input.name] ? errorColor : borderColor,
+                  }}
+                  placeholder={input.placeholder}
+                  placeholderTextColor={placeholderColor}
+                  secureTextEntry={input.secureTextEntry}
+                  value={formData[input.name]}
+                  onChangeText={(value) => handleChange(input.name, value)}
+                />
+                {input.JSXElement ? input.JSXElement : null}
+              </Box>
+            )}
+
+            {errors[input.name] && (
+              <Typography style={{ color: errorColor, fontSize: 12 }}>
+                {errors[input.name]}
+              </Typography>
+            )}
+          </View>
+        ))}
+        <RippleButton
+          style={{ marginTop: 10, width: "auto" }}
+          onPress={handleSubmit}
+        >
+          <Typography color='white' style={{ fontWeight: 600 }}>
+            {butnText ? butnText : "Submit"}
+          </Typography>
+        </RippleButton>
+      </Box>
+    </Box>
   );
 };
 

@@ -14,9 +14,7 @@ import { ThemedToast } from "@/components/provider/ThemeToast";
 import { createStackNavigator } from "@react-navigation/stack";
 import { StatusBar } from "expo-status-bar";
 import { SafeAreaView } from "react-native";
-import HomeLayout from "./layout/HomeLayout";
-import Orders from "./pages/Orders";
-import Profile from "./pages/Profile";
+import Login from "./screens/Login";
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -25,7 +23,7 @@ const Stack = createStackNavigator();
 export default function RootLayout() {
   const colorScheme = useColorScheme();
   const [loaded] = useFonts({
-    SpaceMono: require("../assets/fonts/SpaceMono-Regular.ttf"),
+    SpaceMono: require("../assets/fonts/Lato-Regular.ttf"),
   });
 
   useEffect(() => {
@@ -43,15 +41,13 @@ export default function RootLayout() {
       <SafeAreaView style={{ flex: 1, backgroundColor: "transparent" }}>
         <StatusBar style={colorScheme === "dark" ? "light" : "dark"} />
         <Stack.Navigator
-          initialRouteName='HomeLayout'
+          initialRouteName='login'
           screenOptions={{
             headerShown: false,
             animation: "slide_from_left",
           }}
         >
-          <Stack.Screen name='HomeLayout' component={HomeLayout} />
-          <Stack.Screen name='Profile' component={Profile} />
-          <Stack.Screen name='Order' component={Orders} />
+          <Stack.Screen name='login' component={Login} />
         </Stack.Navigator>
         <ThemedToast />
       </SafeAreaView>

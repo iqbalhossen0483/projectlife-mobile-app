@@ -21,8 +21,14 @@ interface RippleButtonProps {
 
 type Button = React.FC<RippleButtonProps>;
 
-const RippleButton: Button = (props) => {
-  const { children, href, style, onPress, variant, ripple = true } = props;
+const RippleButton: Button = ({
+  children,
+  href,
+  style,
+  onPress,
+  variant,
+  ripple = true,
+}) => {
   const scaleValue = new Animated.Value(0);
   const backgroundColor = useThemeColor("primary");
   const navigation = useNavigation<NavigationProp<string>>();
