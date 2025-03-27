@@ -18,6 +18,10 @@ const Login = () => {
     console.log("password");
   }
 
+  async function handleSubmit(data: Record<string, string>) {
+    console.log(data);
+  }
+
   const EtraElementForPassword = () => (
     <>
       <Pressable
@@ -77,6 +81,10 @@ const Login = () => {
               label: "Email ID",
               placeholder: "Enter Email id",
               required: true,
+              pattern: {
+                regx: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+                message: "Please provide a valid email address",
+              },
             },
             {
               name: "password",
@@ -89,7 +97,7 @@ const Login = () => {
           ]}
           title='Login'
           butnText='Login'
-          onSubmit={(data) => console.log(data)}
+          onSubmit={handleSubmit}
         />
 
         <Typography style={{ textAlign: "center", color: textSeconday }}>

@@ -17,17 +17,19 @@ type FormInput = {
   required?: boolean;
   options?: { label: string; value: string }[];
   JSXElement?: React.JSX.Element;
+  pattern?: { regx: RegExp; message: string };
 };
 
 type FormProps = {
   inputs: FormInput[];
-  onSubmit: (formData: Record<string, string>) => void;
+  onSubmit: (formData: Record<string, string>) => Promise<void>;
   title?: string;
   butnText?: string;
   style?: ViewStyle;
 };
 
 const Form = ({ inputs, onSubmit, title, butnText, style }: FormProps) => {
+  const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState<Record<string, string>>(() => {
     const initialData: Record<string, string> = {};
     inputs.forEach((input) => {
@@ -54,6 +56,13 @@ const Form = ({ inputs, onSubmit, title, butnText, style }: FormProps) => {
     inputs.forEach((input) => {
       if (input.required && !formData[input.name]) {
         newErrors[input.name] = `${input.label} is required`;
+      } else if (input.pattern) {
+        const haveValue = formData[input.name];
+        if (haveValue) {
+          if (!input.pattern.regx.test(haveValue)) {
+            newErrors[input.name] = input.pattern.message;
+          }
+        }
       }
     });
 
@@ -62,10 +71,12 @@ const Form = ({ inputs, onSubmit, title, butnText, style }: FormProps) => {
     return Object.keys(newErrors).length === 0; // If no errors, form is valid
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
+    setIsLoading(true);
     if (validate()) {
-      onSubmit(formData);
+      await onSubmit(formData);
     }
+    setIsLoading(false);
   };
 
   return (
