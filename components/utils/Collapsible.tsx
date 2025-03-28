@@ -1,8 +1,8 @@
+import Entypo from "@expo/vector-icons/Entypo";
 import { PropsWithChildren, useState } from "react";
 import { StyleSheet, TouchableOpacity } from "react-native";
 
 import { Box } from "@/components/utils/Box";
-import { Iconify } from "@/components/utils/Iconify.android";
 import { Typography } from "@/components/utils/Typography";
 import { Colors } from "@/constants/Colors";
 import { useColorScheme } from "@/hooks/useColorScheme";
@@ -21,8 +21,8 @@ export function Collapsible({
         onPress={() => setIsOpen((value) => !value)}
         activeOpacity={0.8}
       >
-        <Iconify
-          name='chevron.right'
+        <Entypo
+          name='chevron-right'
           size={18}
           weight='medium'
           color={theme === "light" ? Colors.light.icon : Colors.dark.icon}

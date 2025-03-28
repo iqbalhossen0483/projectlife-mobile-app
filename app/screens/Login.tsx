@@ -2,6 +2,7 @@ import { useLoginMutation } from "@/api/auth";
 import { Box } from "@/components/utils/Box";
 import RippleButton from "@/components/utils/Button";
 import Form from "@/components/utils/Form";
+import Link from "@/components/utils/Link";
 import { Typography } from "@/components/utils/Typography";
 import useStore from "@/hooks/useStore";
 import { useThemeColor } from "@/hooks/useThemeColor";
@@ -24,10 +25,6 @@ const Login = () => {
   const textSeconday = useThemeColor("textSeconday");
   const loginMutation = useLoginMutation();
   const store = useStore();
-
-  function handleForgetPassword() {
-    console.log("password");
-  }
 
   async function handleSubmit(payload: LoginPayload) {
     loginMutation.mutate(payload, {
@@ -70,7 +67,7 @@ const Login = () => {
           />
         )}
       </Pressable>
-      <Pressable onPress={handleForgetPassword}>
+      <Link href='forget_password'>
         <Typography
           style={{
             fontWeight: 600,
@@ -80,7 +77,7 @@ const Login = () => {
         >
           Forgot Password
         </Typography>
-      </Pressable>
+      </Link>
     </>
   );
 

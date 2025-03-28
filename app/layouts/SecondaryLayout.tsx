@@ -1,7 +1,11 @@
 import { Box } from "@/components/utils/Box";
 import { useThemeColor } from "@/hooks/useThemeColor";
 import Entypo from "@expo/vector-icons/Entypo";
-import { NavigationProp, useNavigation } from "@react-navigation/native";
+import {
+  NavigationProp,
+  ParamListBase,
+  useNavigation,
+} from "@react-navigation/native";
 import { StatusBar } from "expo-status-bar";
 import React from "react";
 import { Pressable, SafeAreaView, useColorScheme } from "react-native";
@@ -17,7 +21,7 @@ const SecondaryLayout = ({
   const boderColor = useThemeColor("border");
   const primaryColor = useThemeColor("primary");
   const colorScheme = useColorScheme();
-  const navigation = useNavigation<NavigationProp<string>>();
+  const navigation = useNavigation<NavigationProp<ParamListBase>>();
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor }}>
