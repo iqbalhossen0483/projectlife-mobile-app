@@ -9,6 +9,7 @@ export const Colors = {
     placeholder: "#9BA1A6",
     disabled: "#D8B6BE",
     border: "#E1EFF8",
+    backDrop: "#2B25274D",
 
     text: "#11181C",
     background: "#fff",
@@ -28,6 +29,7 @@ export const Colors = {
     placeholder: "#9BA1A6",
     disabled: "#D8B6BE",
     border: "#E1EFF8",
+    backDrop: "#2B25274D",
 
     text: "#ECEDEE",
     background: "#151718",

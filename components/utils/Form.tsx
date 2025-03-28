@@ -42,7 +42,7 @@ const Form = ({ inputs, onSubmit, title, butnText, style }: FormProps) => {
   const borderColor = useThemeColor("border");
   const placeholderColor = useThemeColor("placeholder");
   const errorColor = useThemeColor("error");
-
+  console.log(isLoading);
   const handleChange = (name: string, value: string) => {
     setFormData((prev) => ({
       ...prev,

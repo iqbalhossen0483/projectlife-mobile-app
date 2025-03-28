@@ -2,14 +2,28 @@ import { Box } from "@/components/utils/Box";
 import RippleButton from "@/components/utils/Button";
 import InputBox from "@/components/utils/InputBox";
 import { Typography } from "@/components/utils/Typography";
+import useStore from "@/hooks/useStore";
+import { Image } from "expo-image";
 import React, { useState } from "react";
 import SecondaryLayout from "../layouts/SecondaryLayout";
 
 const ForgetPassword = () => {
   const [value, setValue] = useState("");
+  const store = useStore();
 
   function handleSubmit() {
     console.log({ email: value });
+
+    store?.setToastMessage({
+      title: (
+        <Image
+          style={{ width: 40, height: 40 }}
+          contentFit='contain'
+          source={require("../../assets/images/lock-icon.svg")}
+        />
+      ),
+      description: "We have sent you an Otp to Reset Your Password",
+    });
   }
 
   return (

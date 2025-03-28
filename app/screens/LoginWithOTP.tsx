@@ -2,6 +2,7 @@ import { Box } from "@/components/utils/Box";
 import RippleButton from "@/components/utils/Button";
 import InputBox from "@/components/utils/InputBox";
 import { Typography } from "@/components/utils/Typography";
+import useStore from "@/hooks/useStore";
 import { useThemeColor } from "@/hooks/useThemeColor";
 import {
   NavigationProp,
@@ -9,7 +10,6 @@ import {
   useNavigation,
 } from "@react-navigation/native";
 import React, { useState } from "react";
-import Toast from "react-native-toast-message";
 import SecondaryLayout from "../layouts/SecondaryLayout";
 import { routes } from "../Routes/routes";
 
@@ -18,6 +18,7 @@ const LoginWithOTP = () => {
   const navigation = useNavigation<NavigationProp<ParamListBase>>();
   const textSeconday = useThemeColor("textSeconday");
   const [value, setValue] = useState("");
+  const store = useStore();
 
   function handleOtp() {
     try {
@@ -31,11 +32,7 @@ const LoginWithOTP = () => {
       console.log(payload);
       navigation.navigate(routes.otp, { auth_type });
     } catch (error: any) {
-      Toast.show({
-        type: "error",
-        text1: "Error",
-        text2: error.message,
-      });
+      store?.setToastMessage({ title: "Failed", description: error.message });
     }
   }
   return (

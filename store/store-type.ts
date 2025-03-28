@@ -1,3 +1,5 @@
+import React from "react";
+
 export type StoreFn = () => Store;
 
 export interface User {
@@ -12,7 +14,15 @@ export interface User {
   createdAt: string;
 }
 
+export interface ToastMessage {
+  title: string | React.ReactNode | null;
+  description: string | null;
+  onFinished?: () => void;
+}
+
 export interface Store {
   user: User | null;
   setUser: React.Dispatch<React.SetStateAction<User | null>>;
+  toastMessage: ToastMessage;
+  setToastMessage: React.Dispatch<React.SetStateAction<ToastMessage>>;
 }

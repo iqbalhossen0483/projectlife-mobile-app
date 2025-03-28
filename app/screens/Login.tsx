@@ -11,7 +11,6 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Image } from "expo-image";
 import React, { useState } from "react";
 import { Pressable } from "react-native";
-import Toast from "react-native-toast-message";
 import SecondaryLayout from "../layouts/SecondaryLayout";
 
 interface LoginPayload {
@@ -29,19 +28,17 @@ const Login = () => {
   async function handleSubmit(payload: LoginPayload) {
     loginMutation.mutate(payload, {
       onSuccess: (data) => {
-        Toast.show({
-          type: "success",
-          text1: "Success",
-          text2: "Logged in successfully",
+        store?.setToastMessage({
+          title: "Success",
+          description: "Logged in successfully",
         });
         store?.setUser(data.user);
         AsyncStorage.setItem("token", data.token);
       },
       onError: (error) => {
-        Toast.show({
-          type: "error",
-          text1: "Error",
-          text2: error.message || "Something went wrong",
+        store?.setToastMessage({
+          title: "Failed",
+          description: error.message || "Something went wrong",
         });
       },
     });
