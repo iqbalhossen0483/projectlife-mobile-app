@@ -17,6 +17,7 @@ interface RippleButtonProps {
   onPress?: () => void;
   variant?: "containd" | "outline" | "text";
   ripple?: boolean;
+  disabled?: boolean;
 }
 
 type Button = React.FC<RippleButtonProps>;
@@ -28,12 +29,15 @@ const RippleButton: Button = ({
   onPress,
   variant,
   ripple = true,
+  disabled,
 }) => {
-  const scaleValue = new Animated.Value(0);
-  const backgroundColor = useThemeColor("primary");
   const navigation = useNavigation<NavigationProp<string>>();
+  const disabledColor = useThemeColor("disabled");
+  const bgColor = useThemeColor("primary");
+  const scaleValue = new Animated.Value(0);
+  const backgroundColor = disabled ? disabledColor : bgColor;
 
-  const lighterColor = lightenColor(backgroundColor, 20);
+  const lighterColor = lightenColor(bgColor, 20);
 
   const handlePressIn = () => {
     if (Platform.OS === "ios") {
@@ -67,7 +71,7 @@ const RippleButton: Button = ({
     ? {
         onPressIn: handlePressIn,
         onPressOut: handlePressOut,
-        android_ripple: { color: lighterColor, radius: 100 },
+        android_ripple: { color: lighterColor, radius: 200 },
       }
     : {};
 
@@ -75,6 +79,7 @@ const RippleButton: Button = ({
     <Pressable
       {...rippleConfig}
       onPress={handlePress}
+      disabled={disabled}
       style={[
         styles.button,
         variant === "outline"

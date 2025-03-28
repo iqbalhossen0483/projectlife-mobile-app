@@ -8,6 +8,7 @@ import * as SplashScreen from "expo-splash-screen";
 import { useEffect } from "react";
 import "react-native-reanimated";
 
+import QueryProvider from "@/components/provider/QueryProvider";
 import { useColorScheme } from "@/hooks/useColorScheme";
 
 import { ThemedToast } from "@/components/provider/ThemeToast";
@@ -37,20 +38,22 @@ export default function RootLayout() {
   }
 
   return (
-    <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
-      <SafeAreaView style={{ flex: 1, backgroundColor: "transparent" }}>
-        <StatusBar style={colorScheme === "dark" ? "light" : "dark"} />
-        <Stack.Navigator
-          initialRouteName='login'
-          screenOptions={{
-            headerShown: false,
-            animation: "slide_from_left",
-          }}
-        >
-          <Stack.Screen name='login' component={Login} />
-        </Stack.Navigator>
-        <ThemedToast />
-      </SafeAreaView>
-    </ThemeProvider>
+    <QueryProvider>
+      <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
+        <SafeAreaView style={{ flex: 1, backgroundColor: "transparent" }}>
+          <StatusBar style={colorScheme === "dark" ? "light" : "dark"} />
+          <Stack.Navigator
+            initialRouteName='login'
+            screenOptions={{
+              headerShown: false,
+              animation: "slide_from_left",
+            }}
+          >
+            <Stack.Screen name='login' component={Login} />
+          </Stack.Navigator>
+          <ThemedToast />
+        </SafeAreaView>
+      </ThemeProvider>
+    </QueryProvider>
   );
 }

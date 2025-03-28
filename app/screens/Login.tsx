@@ -1,3 +1,4 @@
+import { useLoginMutation } from "@/api/auth/auth";
 import { Box } from "@/components/utils/Box";
 import RippleButton from "@/components/utils/Button";
 import Form from "@/components/utils/Form";
@@ -9,17 +10,30 @@ import React, { useState } from "react";
 import { Pressable } from "react-native";
 import SecondaryLayout from "../layout/SecondaryLayout";
 
+interface LoginPayload {
+  email: string;
+  password: string;
+}
+
 const Login = () => {
+  const placeholderColor = useThemeColor("placeholder");
   const [showSecure, setShowSecure] = useState(false);
   const textSeconday = useThemeColor("textSeconday");
-  const placeholderColor = useThemeColor("placeholder");
+  const loginMutation = useLoginMutation();
 
   function handleForgetPassword() {
     console.log("password");
   }
 
-  async function handleSubmit(data: Record<string, string>) {
-    console.log(data);
+  async function handleSubmit(payload: LoginPayload) {
+    try {
+      loginMutation.mutate(payload, {
+        onSuccess: (data) => console.log(data),
+        onError: (data) => console.log(data),
+      });
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   const EtraElementForPassword = () => (

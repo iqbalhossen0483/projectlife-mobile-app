@@ -22,7 +22,7 @@ type FormInput = {
 
 type FormProps = {
   inputs: FormInput[];
-  onSubmit: (formData: Record<string, string>) => Promise<void>;
+  onSubmit: (formData: any) => Promise<void>;
   title?: string;
   butnText?: string;
   style?: ViewStyle;
@@ -122,6 +122,7 @@ const Form = ({ inputs, onSubmit, title, butnText, style }: FormProps) => {
         <RippleButton
           style={{ marginTop: 10, width: "auto" }}
           onPress={handleSubmit}
+          disabled={isLoading}
         >
           <Typography color='white' style={{ fontWeight: 600 }}>
             {butnText ? butnText : "Submit"}

@@ -7,6 +7,7 @@ export const Colors = {
     white: "#fff",
     textSeconday: "#BEC5D3",
     placeholder: "#9BA1A6",
+    disabled: "#D8B6BE",
 
     text: "#11181C",
     background: "#fff",
@@ -25,6 +26,7 @@ export const Colors = {
     white: "#fff",
     textSeconday: "#11181C",
     placeholder: "#9BA1A6",
+    disabled: "#D8B6BE",
 
     text: "#ECEDEE",
     background: "#151718",
