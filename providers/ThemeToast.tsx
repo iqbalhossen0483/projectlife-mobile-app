@@ -51,5 +51,5 @@ export const ThemedToast = () => {
     ),
   };
 
-  return <Toast config={toastConfig} position='bottom' />;
+  return <Toast config={toastConfig} position='top' />;
 };

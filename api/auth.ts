@@ -1,4 +1,5 @@
 import http from "@/config/http";
+import { User } from "@/store/store-type";
 import { useMutation } from "@tanstack/react-query";
 
 interface LoginPayload {
@@ -8,11 +9,7 @@ interface LoginPayload {
 
 interface LoginResponse {
   token: string;
-  user: {
-    id: string;
-    name: string;
-    email: string;
-  };
+  user: User;
 }
 
 export function useLoginMutation() {

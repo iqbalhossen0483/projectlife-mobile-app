@@ -8,10 +8,11 @@ import * as SplashScreen from "expo-splash-screen";
 import { useEffect } from "react";
 import "react-native-reanimated";
 
-import QueryProvider from "@/components/provider/QueryProvider";
 import { useColorScheme } from "@/hooks/useColorScheme";
+import QueryProvider from "@/providers/QueryProvider";
 
-import { ThemedToast } from "@/components/provider/ThemeToast";
+import StoreProvider from "@/providers/StoreProvider";
+import { ThemedToast } from "@/providers/ThemeToast";
 import { createStackNavigator } from "@react-navigation/stack";
 import { StatusBar } from "expo-status-bar";
 import { SafeAreaView } from "react-native";
@@ -39,21 +40,25 @@ export default function RootLayout() {
 
   return (
     <QueryProvider>
-      <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
-        <SafeAreaView style={{ flex: 1, backgroundColor: "transparent" }}>
-          <StatusBar style={colorScheme === "dark" ? "light" : "dark"} />
-          <Stack.Navigator
-            initialRouteName='login'
-            screenOptions={{
-              headerShown: false,
-              animation: "slide_from_left",
-            }}
-          >
-            <Stack.Screen name='login' component={Login} />
-          </Stack.Navigator>
-          <ThemedToast />
-        </SafeAreaView>
-      </ThemeProvider>
+      <StoreProvider>
+        <ThemeProvider
+          value={colorScheme === "dark" ? DarkTheme : DefaultTheme}
+        >
+          <SafeAreaView style={{ flex: 1, backgroundColor: "transparent" }}>
+            <StatusBar style={colorScheme === "dark" ? "light" : "dark"} />
+            <Stack.Navigator
+              initialRouteName='login'
+              screenOptions={{
+                headerShown: false,
+                animation: "slide_from_left",
+              }}
+            >
+              <Stack.Screen name='login' component={Login} />
+            </Stack.Navigator>
+            <ThemedToast />
+          </SafeAreaView>
+        </ThemeProvider>
+      </StoreProvider>
     </QueryProvider>
   );
 }
