@@ -9,11 +9,12 @@ import {
   StyleSheet,
   ViewStyle,
 } from "react-native";
+import { routes } from "../../app/Routes/routes";
 
 interface RippleButtonProps {
   children: React.ReactNode;
   style?: ViewStyle;
-  href?: string;
+  href?: keyof typeof routes;
   onPress?: () => void;
   variant?: "containd" | "outline" | "text";
   ripple?: boolean;

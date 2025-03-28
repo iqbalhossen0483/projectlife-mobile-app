@@ -85,7 +85,7 @@ const Login = () => {
   );
 
   return (
-    <SecondaryLayout>
+    <SecondaryLayout header={false}>
       <Box style={{ alignItems: "flex-end" }}>
         <Image
           style={{ width: 28, height: 28 }}
@@ -132,7 +132,11 @@ const Login = () => {
           ------------ OR ------------
         </Typography>
 
-        <RippleButton style={{ width: "auto" }} variant='outline'>
+        <RippleButton
+          href='login_with_otp'
+          style={{ width: "auto" }}
+          variant='outline'
+        >
           <Typography color='primary' style={{ fontWeight: 600 }}>
             Login with OTP
           </Typography>

@@ -16,7 +16,7 @@ import { ThemedToast } from "@/providers/ThemeToast";
 import { createStackNavigator } from "@react-navigation/stack";
 import { StatusBar } from "expo-status-bar";
 import { SafeAreaView } from "react-native";
-import Login from "./screens/Login";
+import MainRoute from "./Routes/MainRoute";
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -46,15 +46,7 @@ export default function RootLayout() {
         >
           <SafeAreaView style={{ flex: 1, backgroundColor: "transparent" }}>
             <StatusBar style={colorScheme === "dark" ? "light" : "dark"} />
-            <Stack.Navigator
-              initialRouteName='login'
-              screenOptions={{
-                headerShown: false,
-                animation: "slide_from_left",
-              }}
-            >
-              <Stack.Screen name='login' component={Login} />
-            </Stack.Navigator>
+            <MainRoute />
             <ThemedToast />
           </SafeAreaView>
         </ThemeProvider>

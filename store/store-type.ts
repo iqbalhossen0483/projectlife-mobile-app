@@ -7,7 +7,7 @@ export interface User {
   image?: string;
   status: "active" | "inactive";
   emailVerified: boolean;
-  auth_type: "email" | "number";
+  auth_type: "email" | "mobile";
   role: "user" | "admin";
   createdAt: string;
 }
