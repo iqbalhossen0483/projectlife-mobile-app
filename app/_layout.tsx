@@ -13,14 +13,11 @@ import QueryProvider from "@/providers/QueryProvider";
 
 import StoreProvider from "@/providers/StoreProvider";
 import { ThemedToast } from "@/providers/ThemeToast";
-import { createStackNavigator } from "@react-navigation/stack";
 import { StatusBar } from "expo-status-bar";
 import { SafeAreaView } from "react-native";
 import MainRoute from "./Routes/MainRoute";
 
-// Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
-const Stack = createStackNavigator();
 
 export default function RootLayout() {
   const colorScheme = useColorScheme();

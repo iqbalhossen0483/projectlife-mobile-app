@@ -1,14 +1,24 @@
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
 type options = { header: boolean };
 
 class HTTP_REQUEST {
   private baseUrl: string;
-  private headers: HeadersInit;
+  private headers: Record<string, string>;
 
   constructor() {
     this.baseUrl = process.env.EXPO_PUBLIC_API_URL || "";
     this.headers = {
       "Content-Type": "application/json",
+      authorization: "",
     };
+    this.initializeHeaders();
+  }
+  async initializeHeaders() {
+    const token = await AsyncStorage.getItem("token");
+    if (token) {
+      this.headers["authorization"] = token;
+    }
   }
 
   async post(
@@ -35,12 +45,11 @@ class HTTP_REQUEST {
     }
   }
 
-  async get(end_point: string, options?: options): Promise<any> {
+  async get(end_point: string): Promise<any> {
     try {
-      const headers = options?.header === false ? undefined : this.headers;
       const response = await fetch(this.baseUrl + end_point, {
         method: "GET",
-        headers: headers,
+        headers: this.headers,
       });
 
       const data = await response.json();

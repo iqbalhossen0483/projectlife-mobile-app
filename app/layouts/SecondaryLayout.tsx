@@ -17,11 +17,11 @@ const SecondaryLayout = ({
   children: React.ReactNode;
   header?: boolean;
 }) => {
-  const backgroundColor = useThemeColor("background");
-  const boderColor = useThemeColor("border");
-  const primaryColor = useThemeColor("primary");
-  const colorScheme = useColorScheme();
   const navigation = useNavigation<NavigationProp<ParamListBase>>();
+  const backgroundColor = useThemeColor("background");
+  const primaryColor = useThemeColor("primary");
+  const boderColor = useThemeColor("border");
+  const colorScheme = useColorScheme();
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor }}>

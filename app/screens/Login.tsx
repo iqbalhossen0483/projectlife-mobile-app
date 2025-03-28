@@ -8,10 +8,16 @@ import useStore from "@/hooks/useStore";
 import { useThemeColor } from "@/hooks/useThemeColor";
 import { FontAwesome6 } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import {
+  NavigationProp,
+  ParamListBase,
+  useNavigation,
+} from "@react-navigation/native";
 import { Image } from "expo-image";
 import React, { useState } from "react";
 import { Pressable } from "react-native";
 import SecondaryLayout from "../layouts/SecondaryLayout";
+import { routes } from "../Routes/routes";
 
 interface LoginPayload {
   email: string;
@@ -19,6 +25,7 @@ interface LoginPayload {
 }
 
 const Login = () => {
+  const navigation = useNavigation<NavigationProp<ParamListBase>>();
   const placeholderColor = useThemeColor("placeholder");
   const [showSecure, setShowSecure] = useState(false);
   const textSeconday = useThemeColor("textSeconday");
@@ -31,6 +38,9 @@ const Login = () => {
         store?.setToastMessage({
           title: "Success",
           description: "Logged in successfully",
+          onFinished: () => {
+            navigation.navigate(routes.home);
+          },
         });
         store?.setUser(data.user);
         AsyncStorage.setItem("token", data.token);
