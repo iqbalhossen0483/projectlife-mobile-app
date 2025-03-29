@@ -19,6 +19,7 @@ const DashboardRoute = () => {
           <MainHeader navigation={navigation} title={route.name} />
         ),
         drawerStyle: { backgroundColor, width: "70%" },
+        drawerHideStatusBarOnOpen: true,
       })}
     >
       <Drawer.Screen name={routes.home} component={Home} />
