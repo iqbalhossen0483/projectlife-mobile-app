@@ -11,6 +11,7 @@ import "react-native-reanimated";
 import { useColorScheme } from "@/hooks/useColorScheme";
 import QueryProvider from "@/providers/QueryProvider";
 
+import { useThemeColor } from "@/hooks/useThemeColor";
 import StoreProvider from "@/providers/StoreProvider";
 import { ThemedToast } from "@/providers/ThemeToast";
 import { StatusBar } from "expo-status-bar";
@@ -20,6 +21,7 @@ import MainRoute from "./Routes/MainRoute";
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
+  const backgroundColor = useThemeColor("background");
   const colorScheme = useColorScheme();
   const [loaded] = useFonts({
     SpaceMono: require("../assets/fonts/Lato-Regular.ttf"),
@@ -41,7 +43,7 @@ export default function RootLayout() {
         <ThemeProvider
           value={colorScheme === "dark" ? DarkTheme : DefaultTheme}
         >
-          <SafeAreaView style={{ flex: 1, backgroundColor: "transparent" }}>
+          <SafeAreaView style={{ flex: 1 }}>
             <StatusBar style={colorScheme === "dark" ? "light" : "dark"} />
             <MainRoute />
             <ThemedToast />

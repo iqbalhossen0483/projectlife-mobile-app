@@ -22,7 +22,7 @@ const Store: StoreFn = () => {
       try {
         const { data } = await http.get("/auth/me");
         setUser(data);
-        navigation.navigate(routes.home);
+        navigation.navigate(routes.home_layout);
       } catch (error) {
         console.log(error);
         navigation.navigate(routes.login);

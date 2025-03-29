@@ -6,9 +6,8 @@ import {
   ParamListBase,
   useNavigation,
 } from "@react-navigation/native";
-import { StatusBar } from "expo-status-bar";
 import React from "react";
-import { Pressable, SafeAreaView, useColorScheme } from "react-native";
+import { Dimensions, Pressable } from "react-native";
 
 const SecondaryLayout = ({
   children,
@@ -18,36 +17,39 @@ const SecondaryLayout = ({
   header?: boolean;
 }) => {
   const navigation = useNavigation<NavigationProp<ParamListBase>>();
-  const backgroundColor = useThemeColor("background");
   const primaryColor = useThemeColor("primary");
   const boderColor = useThemeColor("border");
-  const colorScheme = useColorScheme();
+  const backgroundColor = useThemeColor("background");
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor }}>
-      <StatusBar style={colorScheme === "dark" ? "light" : "dark"} />
-      <Box style={{ marginTop: 40, marginHorizontal: 10 }}>
-        {header ? (
-          <Box
-            style={{
-              borderBottomColor: boderColor,
-              borderBottomWidth: 1,
-              paddingBottom: 5,
-              paddingLeft: 2,
-            }}
-          >
-            <Pressable onPress={() => navigation.goBack()}>
-              <Entypo
-                name='chevron-small-left'
-                size={36}
-                style={{ color: primaryColor }}
-              />
-            </Pressable>
-          </Box>
-        ) : null}
-        {children}
-      </Box>
-    </SafeAreaView>
+    <Box
+      style={{
+        minHeight: Dimensions.get("screen").height,
+        paddingHorizontal: 10,
+        paddingTop: 40,
+        backgroundColor,
+      }}
+    >
+      {header ? (
+        <Box
+          style={{
+            borderBottomColor: boderColor,
+            borderBottomWidth: 1,
+            paddingBottom: 5,
+            paddingLeft: 2,
+          }}
+        >
+          <Pressable onPress={() => navigation.goBack()}>
+            <Entypo
+              name='chevron-small-left'
+              size={36}
+              style={{ color: primaryColor }}
+            />
+          </Pressable>
+        </Box>
+      ) : null}
+      {children}
+    </Box>
   );
 };
 

@@ -4,5 +4,9 @@ export const routes = {
   login: "login",
   otp: "otp",
   loading: "loading",
-  home: "home_layout",
+  home_layout: "home_layout",
+  home: "home",
+  profile: "profile",
 };
+
+export default routes;

@@ -10,9 +10,9 @@ export const Colors = {
     disabled: "#D8B6BE",
     border: "#E1EFF8",
     backDrop: "#2B25274D",
+    background: "#fff",
 
     text: "#11181C",
-    background: "#fff",
     cardBackground: "#ffffff",
     tint: tintColorLight,
     icon: "#687076",
@@ -30,9 +30,9 @@ export const Colors = {
     disabled: "#D8B6BE",
     border: "#E1EFF8",
     backDrop: "#2B25274D",
+    background: "#151718",
 
     text: "#ECEDEE",
-    background: "#151718",
     cardBackground: "#3a4042",
     tint: tintColorDark,
     icon: "#9BA1A6",
