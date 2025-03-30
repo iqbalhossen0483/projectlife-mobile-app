@@ -4,6 +4,7 @@ export const routes = {
   login: "login",
   otp: "otp",
   loading: "loading",
+  profile_layout: "profile_layout",
   home_layout: "home_layout",
   home: "home",
   profile: "profile",

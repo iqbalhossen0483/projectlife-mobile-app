@@ -1,5 +1,5 @@
 import { useThemeColor } from "@/hooks/useThemeColor";
-import { NavigationProp } from "@react-navigation/native";
+import { NavigationProp, ParamListBase } from "@react-navigation/native";
 import { useNavigation } from "expo-router";
 import React from "react";
 import {
@@ -32,7 +32,7 @@ const RippleButton: Button = ({
   ripple = true,
   disabled,
 }) => {
-  const navigation = useNavigation<NavigationProp<string>>();
+  const navigation = useNavigation<NavigationProp<ParamListBase>>();
   const disabledColor = useThemeColor("disabled");
   const bgColor = useThemeColor("primary");
   const scaleValue = new Animated.Value(0);

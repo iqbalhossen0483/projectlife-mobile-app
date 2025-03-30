@@ -25,4 +25,6 @@ export interface Store {
   setUser: React.Dispatch<React.SetStateAction<User | null>>;
   toastMessage: ToastMessage;
   setToastMessage: React.Dispatch<React.SetStateAction<ToastMessage>>;
+  userLoading: boolean;
+  setUserLoading: React.Dispatch<React.SetStateAction<boolean>>;
 }

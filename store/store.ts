@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 import { StoreFn, ToastMessage, User } from "./store-type";
 
 const Store: StoreFn = () => {
+  const [userLoading, setUserLoading] = useState(false);
   const [user, setUser] = useState<User | null>(null);
   const [toastMessage, setToastMessage] = useState<ToastMessage>({
     title: null,
@@ -20,12 +21,15 @@ const Store: StoreFn = () => {
   useEffect(() => {
     (async () => {
       try {
+        setUserLoading(true);
         const { data } = await http.get("/auth/me");
         setUser(data);
-        navigation.navigate(routes.home_layout);
+        navigation.navigate(routes.profile_layout);
       } catch (error) {
         console.log(error);
         navigation.navigate(routes.login);
+      } finally {
+        setUserLoading(false);
       }
     })();
   }, []);
@@ -35,6 +39,8 @@ const Store: StoreFn = () => {
     setUser,
     toastMessage,
     setToastMessage,
+    setUserLoading,
+    userLoading,
   };
 };
 export default Store;

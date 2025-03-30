@@ -1,4 +1,5 @@
 import { Box } from "@/components/utils/Box";
+import { Typography } from "@/components/utils/Typography";
 import { useThemeColor } from "@/hooks/useThemeColor";
 import Entypo from "@expo/vector-icons/Entypo";
 import {
@@ -9,13 +10,13 @@ import {
 import React from "react";
 import { Dimensions, Pressable } from "react-native";
 
-const SecondaryLayout = ({
-  children,
-  header = true,
-}: {
+interface Props {
   children: React.ReactNode;
   header?: boolean;
-}) => {
+  title?: string;
+}
+
+const SecondaryLayout = ({ children, header = true, title }: Props) => {
   const navigation = useNavigation<NavigationProp<ParamListBase>>();
   const primaryColor = useThemeColor("primary");
   const boderColor = useThemeColor("border");
@@ -37,6 +38,8 @@ const SecondaryLayout = ({
             borderBottomWidth: 1,
             paddingBottom: 5,
             paddingLeft: 2,
+            flexDirection: "row",
+            alignItems: "center",
           }}
         >
           <Pressable onPress={() => navigation.goBack()}>
@@ -46,6 +49,18 @@ const SecondaryLayout = ({
               style={{ color: primaryColor }}
             />
           </Pressable>
+          {title && (
+            <Typography
+              style={{
+                flex: 1,
+                textAlign: "center",
+                fontWeight: 500,
+                fontSize: 18,
+              }}
+            >
+              {title}
+            </Typography>
+          )}
         </Box>
       ) : null}
       {children}

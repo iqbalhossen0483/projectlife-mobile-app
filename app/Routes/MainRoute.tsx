@@ -27,7 +27,7 @@ const MainRoute = () => {
       <Stack.Screen name={routes.loading} component={Loading} />
       {/* auth rotues end  */}
 
-      <Stack.Screen name={routes.home_layout} component={ProfileRoute} />
+      <Stack.Screen name={routes.profile_layout} component={ProfileRoute} />
     </Stack.Navigator>
   );
 };

@@ -1,9 +1,28 @@
 import { Box } from "@/components/utils/Box";
+import useStore from "@/hooks/useStore";
+import { NavigationProp, ParamListBase } from "@react-navigation/native";
 import { Image } from "expo-image";
-import React from "react";
+import { useFocusEffect, useNavigation } from "expo-router";
+import React, { useCallback } from "react";
 import SecondaryLayout from "../layouts/SecondaryLayout";
+import routes from "../Routes/routes";
 
 const Loading = () => {
+  const navigation = useNavigation<NavigationProp<ParamListBase>>();
+  const store = useStore();
+
+  useFocusEffect(
+    useCallback(() => {
+      if (store?.userLoading) return;
+
+      if (store?.user) {
+        navigation.navigate(routes.profile_layout);
+      } else {
+        navigation.navigate(routes.login);
+      }
+    }, [store?.userLoading, store?.user])
+  );
+
   return (
     <SecondaryLayout header={false}>
       <Box>
