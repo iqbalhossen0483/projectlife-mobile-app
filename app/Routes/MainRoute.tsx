@@ -5,7 +5,7 @@ import Loading from "../screens/Loading";
 import Login from "../screens/Login";
 import LoginWithOTP from "../screens/LoginWithOTP";
 import OTP from "../screens/OTP";
-import DashboardRoute from "./DashboardRoute";
+import ProfileRoute from "./ProfileRoute";
 import { routes } from "./routes";
 
 const Stack = createStackNavigator();
@@ -27,7 +27,7 @@ const MainRoute = () => {
       <Stack.Screen name={routes.loading} component={Loading} />
       {/* auth rotues end  */}
 
-      <Stack.Screen name={routes.home_layout} component={DashboardRoute} />
+      <Stack.Screen name={routes.home_layout} component={ProfileRoute} />
     </Stack.Navigator>
   );
 };

@@ -7,6 +7,7 @@ export const routes = {
   home_layout: "home_layout",
   home: "home",
   profile: "profile",
+  reset_password: "reset_password",
 };
 
 export default routes;

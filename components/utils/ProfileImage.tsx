@@ -12,7 +12,7 @@ const ProfileImage = (props: ProfileImageProps) => {
   const image_url = profile
     ? `${config?.server_url}//${store?.user?.image}`
     : require("../../assets/images/no-photo.png");
-  console.log(image_url);
+
   return <Image {...props} source={image_url} />;
 };
 

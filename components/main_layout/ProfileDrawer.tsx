@@ -1,3 +1,4 @@
+import routes from "@/app/Routes/routes";
 import useStore from "@/hooks/useStore";
 import { useThemeColor } from "@/hooks/useThemeColor";
 import Entypo from "@expo/vector-icons/Entypo";
@@ -13,7 +14,7 @@ import ProfileImage from "../utils/ProfileImage";
 import Switch from "../utils/Switch";
 import { Typography } from "../utils/Typography";
 
-const MainDrawer = (props: DrawerContentComponentProps) => {
+const ProfileDrawer = (props: DrawerContentComponentProps) => {
   const [notificationOn, setNotificationOn] = useState(true);
   const placeholderColor = useThemeColor("placeholder");
   const primaryColor = useThemeColor("primary");
@@ -23,6 +24,7 @@ const MainDrawer = (props: DrawerContentComponentProps) => {
 
   return (
     <Box style={{ position: "relative", height: "100%" }}>
+      {/* header start */}
       <Box style={[styles.headerContainer, { backgroundColor: primaryColor }]}>
         <ProfileImage style={{ height: 50, width: 50, borderRadius: 10 }} />
         <Typography color='white' style={{ fontWeight: 500 }}>
@@ -36,7 +38,10 @@ const MainDrawer = (props: DrawerContentComponentProps) => {
           <MaterialIcons name='close' size={22} style={{ color: whiteColor }} />
         </Pressable>
       </Box>
+      {/* header end */}
+
       <Box style={styles.container}>
+        {/* duty status start */}
         <Box style={[styles.row, { paddingHorizontal: 10 }]}>
           <Typography style={{ fontWeight: 500 }}>Your Duty Status:</Typography>
           <Box style={[styles.row, { gap: 5 }]}>
@@ -50,8 +55,12 @@ const MainDrawer = (props: DrawerContentComponentProps) => {
             <Typography style={{ fontWeight: 500 }}>On</Typography>
           </Box>
         </Box>
+        {/* duty status end */}
+
+        {/* profile setting start */}
         <Box style={{ marginTop: 20 }}>
           <RippleButton
+            onPress={() => props.navigation.navigate(routes.profile)}
             variant='text'
             style={{ ...styles.row, width: "auto", paddingHorizontal: 10 }}
           >
@@ -67,7 +76,11 @@ const MainDrawer = (props: DrawerContentComponentProps) => {
               color={placeholderColor}
             />
           </RippleButton>
+          {/* profile setting end */}
+
+          {/* change password start */}
           <RippleButton
+            onPress={() => props.navigation.navigate(routes.reset_password)}
             variant='text'
             style={{ ...styles.row, width: "auto", paddingHorizontal: 10 }}
           >
@@ -86,6 +99,9 @@ const MainDrawer = (props: DrawerContentComponentProps) => {
               color={placeholderColor}
             />
           </RippleButton>
+          {/* change password end */}
+
+          {/* Notification start */}
           <RippleButton
             variant='text'
             ripple={false}
@@ -101,14 +117,20 @@ const MainDrawer = (props: DrawerContentComponentProps) => {
             </Box>
             <Switch open={notificationOn} setOpen={setNotificationOn} />
           </RippleButton>
+          {/* Notification end */}
+
+          {/* log out start */}
           <RippleButton variant='text' style={styles.logout}>
             <View style={[styles.row, { gap: 10 }]}>
               <MaterialIcons name='logout' size={24} color={primaryColor} />
               <Typography style={{ fontWeight: 500 }}>Logout</Typography>
             </View>
           </RippleButton>
+          {/* log out end */}
         </Box>
       </Box>
+
+      {/* footer start */}
       <Box style={{ position: "absolute", bottom: 30, left: 20 }}>
         <Typography color='placeholder'>Version: 1.0.0</Typography>
         <Box style={{ flexDirection: "row", gap: 4, alignItems: "center" }}>
@@ -121,6 +143,7 @@ const MainDrawer = (props: DrawerContentComponentProps) => {
           <Typography style={{ fontWeight: 500 }}>by LCG</Typography>
         </Box>
       </Box>
+      {/* footer end */}
     </Box>
   );
 };
@@ -159,4 +182,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default MainDrawer;
+export default ProfileDrawer;
