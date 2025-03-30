@@ -1,11 +1,14 @@
 import { useThemeColor } from "@/hooks/useThemeColor";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { View, ViewStyle } from "react-native";
 import { Box } from "./Box";
 import RippleButton from "./Button";
 import DropDown from "./Dropdown";
 import InputBox from "./InputBox";
+import Select from "./Select";
 import { Typography } from "./Typography";
+
+type DropDownOption = { label: string; value: string }[];
 
 type FormInput = {
   name: string;
@@ -15,9 +18,13 @@ type FormInput = {
   secureTextEntry?: boolean;
   error?: string;
   required?: boolean;
-  options?: { label: string; value: string }[];
+  variant?: {
+    type: "drop-down" | "select";
+    options: DropDownOption | string[];
+  };
   JSXElement?: React.JSX.Element;
   pattern?: { regx: RegExp; message: string };
+  disabled?: boolean;
 };
 
 type FormProps = {
@@ -27,6 +34,8 @@ type FormProps = {
   butnText?: string;
   style?: ViewStyle;
   bottomBorder?: boolean;
+  dependancy?: boolean;
+  ExtraBtn?: React.ReactNode;
 };
 
 const Form = ({
@@ -36,15 +45,19 @@ const Form = ({
   butnText,
   style,
   bottomBorder = false,
+  dependancy,
+  ExtraBtn,
 }: FormProps) => {
   const [isLoading, setIsLoading] = useState(false);
-  const [formData, setFormData] = useState<Record<string, string>>(() => {
+  const [formData, setFormData] = useState<Record<string, string>>({});
+
+  useEffect(() => {
     const initialData: Record<string, string> = {};
     inputs.forEach((input) => {
       initialData[input.name] = input.value || "";
     });
-    return initialData;
-  });
+    setFormData(initialData);
+  }, [dependancy]);
 
   const [errors, setErrors] = useState<Record<string, string>>({});
   const borderColor = useThemeColor("border");
@@ -110,11 +123,17 @@ const Form = ({
             >
               {input.label}
             </Typography>
-            {input.options ? (
+            {input.variant && input.variant.type === "drop-down" ? (
               <DropDown
-                data={input.options}
+                data={input.variant.options as DropDownOption}
                 placeholder={input.placeholder}
                 setData={(value) => handleChange(input.name, value)}
+              />
+            ) : input.variant && input?.variant.type === "select" ? (
+              <Select
+                value={formData[input.name]}
+                options={input.variant.options as [string]}
+                onChange={(value) => handleChange(input.name, value as string)}
               />
             ) : (
               <Box style={{ position: "relative" }}>
@@ -130,6 +149,7 @@ const Form = ({
                       height: "auto",
                     }),
                   }}
+                  readOnly={input.disabled}
                   placeholder={input.placeholder}
                   placeholderTextColor={placeholderColor}
                   secureTextEntry={input.secureTextEntry}
@@ -147,15 +167,26 @@ const Form = ({
             )}
           </View>
         ))}
-        <RippleButton
-          style={{ marginTop: 10, width: "auto" }}
-          onPress={handleSubmit}
-          disabled={isLoading}
+        <View
+          style={{
+            flexDirection: "row",
+            justifyContent: "space-between",
+            alignItems: "center",
+            marginTop: 10,
+            gap: 20,
+          }}
         >
-          <Typography color='white' style={{ fontWeight: 600 }}>
-            {butnText ? butnText : "Submit"}
-          </Typography>
-        </RippleButton>
+          {ExtraBtn}
+          <RippleButton
+            style={{ width: "auto", flex: 1 }}
+            onPress={handleSubmit}
+            disabled={isLoading}
+          >
+            <Typography color='white' style={{ fontWeight: 600 }}>
+              {butnText ? butnText : "Submit"}
+            </Typography>
+          </RippleButton>
+        </View>
       </Box>
     </Box>
   );
