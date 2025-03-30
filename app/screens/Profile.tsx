@@ -3,6 +3,7 @@ import Form from "@/components/utils/Form";
 import { Typography } from "@/components/utils/Typography";
 import useStore from "@/hooks/useStore";
 import { useThemeColor } from "@/hooks/useThemeColor";
+import { User } from "@/store/store-type";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import { NavigationProp, ParamListBase } from "@react-navigation/native";
@@ -17,14 +18,16 @@ const Profile = () => {
   const [showCountryCode, setShowCountryCode] = useState(false);
   const placeHolderColor = useThemeColor("placeholder");
   const [showDate, setShowDate] = useState(false);
-  const [code, setCode] = useState("+91");
+  const store = useStore();
+  const [code, setCode] = useState(store?.user?.country_code);
   const [date, setDate] = useState<Date>(() => {
     const dob = store?.user?.dob;
     return dob ? new Date(dob) : new Date();
   });
-  const store = useStore();
 
-  async function handleSubmit(data: any) {}
+  async function handleSubmit(data: User) {
+    console.log(data);
+  }
 
   const DateOfBirthElement = () => {
     return (
@@ -63,7 +66,7 @@ const Profile = () => {
             setCode(item.dial_code);
             setShowCountryCode(false);
           }}
-          popularCountries={["en", "ua", "pl"]}
+          popularCountries={["US", "UA", "PL"]}
           lang={""}
         />
 
@@ -71,7 +74,7 @@ const Profile = () => {
           style={{ position: "absolute", left: 0, top: 10 }}
           onPress={() => setShowCountryCode(true)}
         >
-          <Typography>{code}</Typography>
+          <Typography>{code || "+91"}</Typography>
         </Pressable>
       </>
     );
@@ -82,7 +85,7 @@ const Profile = () => {
       <Form
         style={{ marginTop: 10, marginBottom: 20 }}
         onSubmit={handleSubmit}
-        bottomBorder
+        bottomBorder={true}
         dependancy={showDate}
         inputs={[
           {
@@ -93,7 +96,7 @@ const Profile = () => {
           },
           {
             label: "Last Name",
-            name: "last",
+            name: "last_name",
             placeholder: "Enter last name",
             value: store?.user?.last_name,
           },

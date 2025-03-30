@@ -170,7 +170,7 @@ const Form = ({
               </Typography>
             )}
           </View>
-        ))}{" "}
+        ))}
         <View
           style={{
             flexDirection: "row",

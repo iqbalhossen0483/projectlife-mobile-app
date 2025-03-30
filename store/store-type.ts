@@ -15,6 +15,7 @@ export interface User {
   city: string;
   address: string;
   mobile: string;
+  country_code: string;
   status: "active" | "inactive";
   emailVerified: boolean;
   auth_type: "email" | "mobile";
