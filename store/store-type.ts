@@ -4,9 +4,17 @@ export type StoreFn = () => Store;
 
 export interface User {
   _id: string;
-  name: string;
+  first_name: string;
+  last_name: string;
+  hospital_name: string;
   email: string;
   image?: string;
+  dob: string;
+  sex: "male" | "female";
+  profession: "doctor" | "nurse";
+  city: string;
+  address: string;
+  mobile: string;
   status: "active" | "inactive";
   emailVerified: boolean;
   auth_type: "email" | "mobile";

@@ -1,4 +1,5 @@
 import { useLoginMutation } from "@/api/auth";
+import ShowAndHidePassword from "@/components/common/ShowAndHidePassword";
 import { Box } from "@/components/utils/Box";
 import RippleButton from "@/components/utils/Button";
 import Form from "@/components/utils/Form";
@@ -6,7 +7,6 @@ import Link from "@/components/utils/Link";
 import { Typography } from "@/components/utils/Typography";
 import useStore from "@/hooks/useStore";
 import { useThemeColor } from "@/hooks/useThemeColor";
-import { FontAwesome6 } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import {
   NavigationProp,
@@ -15,7 +15,6 @@ import {
 } from "@react-navigation/native";
 import { Image } from "expo-image";
 import React, { useState } from "react";
-import { Pressable } from "react-native";
 import SecondaryLayout from "../layouts/SecondaryLayout";
 import { routes } from "../Routes/routes";
 
@@ -56,24 +55,10 @@ const Login = () => {
 
   const EtraElementForPassword = () => (
     <>
-      <Pressable
-        onPress={() => setShowSecure((prev) => !prev)}
-        style={{ position: "absolute", right: 10, top: 12 }}
-      >
-        {!showSecure ? (
-          <FontAwesome6
-            style={{ color: placeholderColor }}
-            name='eye'
-            size={20}
-          />
-        ) : (
-          <FontAwesome6
-            name='eye-slash'
-            size={19}
-            style={{ color: placeholderColor }}
-          />
-        )}
-      </Pressable>
+      <ShowAndHidePassword
+        setShowSecure={setShowSecure}
+        showSecure={showSecure}
+      />
       <Link href='forget_password'>
         <Typography
           style={{

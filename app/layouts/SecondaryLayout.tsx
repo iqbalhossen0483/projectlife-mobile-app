@@ -8,7 +8,16 @@ import {
   useNavigation,
 } from "@react-navigation/native";
 import React from "react";
-import { Dimensions, Pressable } from "react-native";
+import {
+  Dimensions,
+  Keyboard,
+  KeyboardAvoidingView,
+  Platform,
+  Pressable,
+  ScrollView,
+  TouchableWithoutFeedback,
+  View,
+} from "react-native";
 
 interface Props {
   children: React.ReactNode;
@@ -25,7 +34,7 @@ const SecondaryLayout = ({ children, header = true, title }: Props) => {
   return (
     <Box
       style={{
-        minHeight: Dimensions.get("screen").height,
+        minHeight: Dimensions.get("screen").height - 15,
         paddingHorizontal: 10,
         paddingTop: 40,
         backgroundColor,
@@ -63,7 +72,16 @@ const SecondaryLayout = ({ children, header = true, title }: Props) => {
           )}
         </Box>
       ) : null}
-      {children}
+      <KeyboardAvoidingView
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        style={{ flex: 1 }}
+      >
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+          <ScrollView style={{ flex: 1 }} keyboardShouldPersistTaps='handled'>
+            <View>{children}</View>
+          </ScrollView>
+        </TouchableWithoutFeedback>
+      </KeyboardAvoidingView>
     </Box>
   );
 };

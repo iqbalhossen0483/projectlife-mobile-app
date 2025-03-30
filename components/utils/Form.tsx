@@ -26,9 +26,17 @@ type FormProps = {
   title?: string;
   butnText?: string;
   style?: ViewStyle;
+  bottomBorder?: boolean;
 };
 
-const Form = ({ inputs, onSubmit, title, butnText, style }: FormProps) => {
+const Form = ({
+  inputs,
+  onSubmit,
+  title,
+  butnText,
+  style,
+  bottomBorder = false,
+}: FormProps) => {
   const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState<Record<string, string>>(() => {
     const initialData: Record<string, string> = {};
@@ -81,13 +89,25 @@ const Form = ({ inputs, onSubmit, title, butnText, style }: FormProps) => {
 
   return (
     <Box style={style}>
-      <Typography style={{ marginBottom: 30 }} color='primary' type='subtitle'>
-        {title}
-      </Typography>
+      {title && (
+        <Typography
+          style={{ marginBottom: 30 }}
+          color='primary'
+          type='subtitle'
+        >
+          {title}
+        </Typography>
+      )}
       <Box style={{ rowGap: 15 }}>
         {inputs.map((input) => (
           <View key={input.name}>
-            <Typography style={{ fontWeight: 500, marginBottom: 3 }}>
+            <Typography
+              color={bottomBorder ? "placeholder" : undefined}
+              style={{
+                fontWeight: bottomBorder ? undefined : 500,
+                marginBottom: bottomBorder ? 0 : 3,
+              }}
+            >
               {input.label}
             </Typography>
             {input.options ? (
@@ -101,6 +121,14 @@ const Form = ({ inputs, onSubmit, title, butnText, style }: FormProps) => {
                 <InputBox
                   style={{
                     borderColor: errors[input.name] ? errorColor : borderColor,
+                    ...(bottomBorder && {
+                      borderWidth: 0,
+                      borderBottomWidth: 1,
+                      borderRadius: 0,
+                      paddingLeft: 0,
+                      paddingHorizontal: 0,
+                      height: "auto",
+                    }),
                   }}
                   placeholder={input.placeholder}
                   placeholderTextColor={placeholderColor}

@@ -28,7 +28,7 @@ const ProfileDrawer = (props: DrawerContentComponentProps) => {
       <Box style={[styles.headerContainer, { backgroundColor: primaryColor }]}>
         <ProfileImage style={{ height: 50, width: 50, borderRadius: 10 }} />
         <Typography color='white' style={{ fontWeight: 500 }}>
-          {store?.user?.name}
+          {store?.user?.hospital_name}
         </Typography>
 
         <Pressable

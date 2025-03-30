@@ -38,7 +38,7 @@ const MainHeader = ({ navigation, title }: Props) => {
             style={[styles.profile, { borderColor: borderColor }]}
           />
           <Typography style={{ fontSize: 18, fontWeight: 600 }}>
-            {store?.user?.name}
+            {store?.user?.hospital_name}
           </Typography>
         </Box>
         <Box style={{ position: "relative" }}>
