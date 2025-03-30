@@ -9,16 +9,19 @@ import { NavigationProp, ParamListBase } from "@react-navigation/native";
 import { useNavigation } from "expo-router";
 import React, { useState } from "react";
 import { Pressable } from "react-native";
+import { CountryPicker } from "react-native-country-codes-picker";
 import SecondaryLayout from "../layouts/SecondaryLayout";
 
 const Profile = () => {
-  const [showDate, setShowDate] = useState(false);
   const navigation = useNavigation<NavigationProp<ParamListBase>>();
+  const [showCountryCode, setShowCountryCode] = useState(false);
+  const placeHolderColor = useThemeColor("placeholder");
+  const [showDate, setShowDate] = useState(false);
+  const [code, setCode] = useState("+91");
   const [date, setDate] = useState<Date>(() => {
     const dob = store?.user?.dob;
     return dob ? new Date(dob) : new Date();
   });
-  const placeHolderColor = useThemeColor("placeholder");
   const store = useStore();
 
   async function handleSubmit(data: any) {}
@@ -46,6 +49,29 @@ const Profile = () => {
             size={24}
             color={placeHolderColor}
           />
+        </Pressable>
+      </>
+    );
+  };
+
+  const CountryCodeElement = () => {
+    return (
+      <>
+        <CountryPicker
+          show={showCountryCode}
+          pickerButtonOnPress={(item) => {
+            setCode(item.dial_code);
+            setShowCountryCode(false);
+          }}
+          popularCountries={["en", "ua", "pl"]}
+          lang={""}
+        />
+
+        <Pressable
+          style={{ position: "absolute", left: 0, top: 10 }}
+          onPress={() => setShowCountryCode(true)}
+        >
+          <Typography>{code}</Typography>
         </Pressable>
       </>
     );
@@ -105,6 +131,9 @@ const Profile = () => {
             name: "mobile",
             placeholder: "Enter mobile no.",
             value: store?.user?.mobile,
+            JSXElement: <CountryCodeElement />,
+            style: { paddingLeft: 40 },
+            keyboardType: "number-pad",
           },
           {
             label: "City",

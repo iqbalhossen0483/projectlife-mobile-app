@@ -1,6 +1,6 @@
 import { useThemeColor } from "@/hooks/useThemeColor";
 import React, { useEffect, useState } from "react";
-import { View, ViewStyle } from "react-native";
+import { KeyboardTypeOptions, TextStyle, View, ViewStyle } from "react-native";
 import { Box } from "./Box";
 import RippleButton from "./Button";
 import DropDown from "./Dropdown";
@@ -25,6 +25,8 @@ type FormInput = {
   JSXElement?: React.JSX.Element;
   pattern?: { regx: RegExp; message: string };
   disabled?: boolean;
+  style?: TextStyle;
+  keyboardType?: KeyboardTypeOptions;
 };
 
 type FormProps = {
@@ -148,6 +150,7 @@ const Form = ({
                       paddingHorizontal: 0,
                       height: "auto",
                     }),
+                    ...(input.style && input.style),
                   }}
                   readOnly={input.disabled}
                   placeholder={input.placeholder}
@@ -155,6 +158,7 @@ const Form = ({
                   secureTextEntry={input.secureTextEntry}
                   value={formData[input.name]}
                   onChangeText={(value) => handleChange(input.name, value)}
+                  keyboardType={input.keyboardType}
                 />
                 {input.JSXElement ? input.JSXElement : null}
               </Box>
@@ -166,7 +170,7 @@ const Form = ({
               </Typography>
             )}
           </View>
-        ))}
+        ))}{" "}
         <View
           style={{
             flexDirection: "row",
