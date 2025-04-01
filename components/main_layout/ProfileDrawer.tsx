@@ -87,7 +87,7 @@ const ProfileDrawer = (props: DrawerContentComponentProps) => {
             <View style={[styles.row, { gap: 10 }]}>
               <Image
                 style={{ height: 20, width: 20 }}
-                source={require("../../assets/images/password.svg")}
+                source={require("../../assets/icons/password.svg")}
               />
               <Typography style={{ fontWeight: 500 }}>
                 Change Password
@@ -137,7 +137,7 @@ const ProfileDrawer = (props: DrawerContentComponentProps) => {
           <Typography style={{ fontWeight: 500 }}>Made with</Typography>
           <Image
             style={{ height: 16, width: 18 }}
-            source={require("../../assets/images/love.svg")}
+            source={require("../../assets/icons/love.svg")}
             contentFit='contain'
           />
           <Typography style={{ fontWeight: 500 }}>by LCG</Typography>

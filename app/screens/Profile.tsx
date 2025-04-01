@@ -1,6 +1,7 @@
 import RippleButton from "@/components/utils/Button";
 import Form from "@/components/utils/Form";
 import { Typography } from "@/components/utils/Typography";
+import http from "@/config/http";
 import useStore from "@/hooks/useStore";
 import { useThemeColor } from "@/hooks/useThemeColor";
 import { User } from "@/store/store-type";
@@ -19,14 +20,23 @@ const Profile = () => {
   const placeHolderColor = useThemeColor("placeholder");
   const [showDate, setShowDate] = useState(false);
   const store = useStore();
-  const [code, setCode] = useState(store?.user?.country_code);
+  const [code, setCode] = useState(store?.user?.country_code ?? "+91");
   const [date, setDate] = useState<Date>(() => {
     const dob = store?.user?.dob;
     return dob ? new Date(dob) : new Date();
   });
 
   async function handleSubmit(data: User) {
-    console.log(data);
+    try {
+      data.country_code = code;
+      await http.put("/auth/update", data);
+      store?.setToastMessage({
+        title: "Success",
+        description: "Profile updated successfully",
+      });
+    } catch (error: any) {
+      store?.setToastMessage({ title: "Failed", description: error.message });
+    }
   }
 
   const DateOfBirthElement = () => {
@@ -74,7 +84,7 @@ const Profile = () => {
           style={{ position: "absolute", left: 0, top: 10 }}
           onPress={() => setShowCountryCode(true)}
         >
-          <Typography>{code || "+91"}</Typography>
+          <Typography>{code}</Typography>
         </Pressable>
       </>
     );

@@ -4,6 +4,7 @@ import { NavigationProp, ParamListBase } from "@react-navigation/native";
 import { Image } from "expo-image";
 import { useFocusEffect, useNavigation } from "expo-router";
 import React, { useCallback } from "react";
+import { Dimensions } from "react-native";
 import SecondaryLayout from "../layouts/SecondaryLayout";
 import routes from "../Routes/routes";
 
@@ -25,9 +26,18 @@ const Loading = () => {
 
   return (
     <SecondaryLayout header={false}>
-      <Box>
+      <Box
+        style={{
+          flex: 1,
+          height: Dimensions.get("window").height,
+        }}
+      >
         <Image
-          style={{ height: "100%", width: "100%" }}
+          style={{
+            height: "100%",
+            width: "100%",
+            padding: 0,
+          }}
           contentFit='contain'
           source={require("../../assets/images/splash-screen.svg")}
         />

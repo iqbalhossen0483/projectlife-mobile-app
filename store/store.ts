@@ -24,7 +24,7 @@ const Store: StoreFn = () => {
         setUserLoading(true);
         const { data } = await http.get("/auth/me");
         setUser(data);
-        navigation.navigate(routes.profile_layout);
+        // navigation.navigate(routes.profile_layout);
       } catch (error) {
         console.log(error);
         navigation.navigate(routes.login);

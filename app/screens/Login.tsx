@@ -78,7 +78,7 @@ const Login = () => {
       <Box style={{ alignItems: "flex-end" }}>
         <Image
           style={{ width: 28, height: 28 }}
-          source={require("../../assets/images/info-icon.svg")}
+          source={require("../../assets/icons/info-icon.svg")}
           contentFit='contain'
         />
       </Box>

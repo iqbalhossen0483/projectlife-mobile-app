@@ -6,9 +6,12 @@ export const routes = {
   loading: "loading",
   profile_layout: "profile_layout",
   home_layout: "home_layout",
-  home: "home",
   profile: "profile",
   reset_password: "reset_password",
+  home: "home",
+  patients: "patients",
+  round: "round",
+  account: "account",
 };
 
 export default routes;

@@ -19,7 +19,7 @@ const ForgetPassword = () => {
         <Image
           style={{ width: 40, height: 40 }}
           contentFit='contain'
-          source={require("../../assets/images/lock-icon.svg")}
+          source={require("../../assets/icons/lock-icon.svg")}
         />
       ),
       description: "We have sent you an Otp to Reset Your Password",

@@ -13,10 +13,9 @@ import ProfileImage from "../utils/ProfileImage";
 
 interface Props {
   navigation: DrawerNavigationProp<ParamListBase>;
-  title: string;
 }
 
-const MainHeader = ({ navigation, title }: Props) => {
+const MainHeader = ({ navigation }: Props) => {
   const placeHolderColor = useThemeColor("placeholder");
   const backgroundColor = useThemeColor("background");
   const primaryColor = useThemeColor("primary");
