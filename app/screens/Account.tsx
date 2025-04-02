@@ -1,12 +1,70 @@
-import { Box } from "@/components/utils/Box";
+import Export from "@/components/icons/Export";
+import Hospital from "@/components/icons/Hospital";
+import Staff from "@/components/icons/Staff";
+import Card from "@/components/utils/Card";
 import { Typography } from "@/components/utils/Typography";
+import { useThemeColor } from "@/hooks/useThemeColor";
+import { Entypo } from "@expo/vector-icons";
 import React from "react";
+import { Pressable, View } from "react-native";
+
+const data = [
+  {
+    name: "Wards",
+    Icon: Hospital,
+  },
+  {
+    name: "Staff",
+    Icon: Staff,
+  },
+  {
+    name: "Export Data",
+    Icon: Export,
+  },
+];
 
 const Account = () => {
+  const primaryLightColor = useThemeColor("primary-light");
+  const placeHolderColor = useThemeColor("placeholder");
+
   return (
-    <Box>
-      <Typography>Account</Typography>
-    </Box>
+    <View style={{ gap: 15, marginHorizontal: 15, marginVertical: 20 }}>
+      {data.map((item) => (
+        <Pressable key={item.name}>
+          <Card
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "space-between",
+            }}
+          >
+            <View
+              style={{
+                flexDirection: "row",
+                alignItems: "center",
+                gap: 10,
+              }}
+            >
+              <View
+                style={{
+                  backgroundColor: primaryLightColor,
+                  padding: 10,
+                  borderRadius: 8,
+                }}
+              >
+                <item.Icon width={24} height={24} />
+              </View>
+              <Typography style={{ fontWeight: 500 }}>{item.name}</Typography>
+            </View>
+            <Entypo
+              name='chevron-small-right'
+              size={24}
+              color={placeHolderColor}
+            />
+          </Card>
+        </Pressable>
+      ))}
+    </View>
   );
 };
 

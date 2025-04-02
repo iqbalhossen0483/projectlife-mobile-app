@@ -4,6 +4,7 @@ const tintColorDark = "#fff";
 export const Colors = {
   light: {
     primary: "#FC5285",
+    "primary-light": "#FFF1F5",
     white: "#fff",
     textSeconday: "#BEC5D3",
     placeholder: "#9BA1A6",
@@ -23,6 +24,7 @@ export const Colors = {
   },
   dark: {
     primary: "#FC5285",
+    "primary-light": "#FFF1F5",
     white: "#fff",
     textSeconday: "#11181C",
     placeholder: "#9BA1A6",

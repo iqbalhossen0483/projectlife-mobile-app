@@ -62,7 +62,7 @@ const TabBottomNavigation = (props: BottomTabBarProps) => {
               />
               <Typography
                 color={activeTab === item.route ? "primary" : "placeholder"}
-                style={{ fontWeight: 500 }}
+                style={{ fontWeight: 500, fontSize: 14 }}
               >
                 {item.name}
               </Typography>
