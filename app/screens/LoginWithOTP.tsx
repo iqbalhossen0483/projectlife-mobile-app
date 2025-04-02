@@ -3,7 +3,6 @@ import RippleButton from "@/components/utils/Button";
 import InputBox from "@/components/utils/InputBox";
 import { Typography } from "@/components/utils/Typography";
 import useStore from "@/hooks/useStore";
-import { useThemeColor } from "@/hooks/useThemeColor";
 import {
   NavigationProp,
   ParamListBase,
@@ -16,7 +15,6 @@ import { routes } from "../Routes/routes";
 const LoginWithOTP = () => {
   const [authType, setAuthType] = useState({ mobile: false, email: false });
   const navigation = useNavigation<NavigationProp<ParamListBase>>();
-  const textSeconday = useThemeColor("textSeconday");
   const [value, setValue] = useState("");
   const store = useStore();
 
@@ -64,7 +62,7 @@ const LoginWithOTP = () => {
             )}
           </Box>
 
-          <Typography style={{ textAlign: "center", color: textSeconday }}>
+          <Typography color='gray' style={{ textAlign: "center" }}>
             ------------ OR ------------
           </Typography>
 

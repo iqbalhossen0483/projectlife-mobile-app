@@ -6,7 +6,6 @@ import Form from "@/components/utils/Form";
 import Link from "@/components/utils/Link";
 import { Typography } from "@/components/utils/Typography";
 import useStore from "@/hooks/useStore";
-import { useThemeColor } from "@/hooks/useThemeColor";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import {
   NavigationProp,
@@ -26,7 +25,6 @@ interface LoginPayload {
 const Login = () => {
   const navigation = useNavigation<NavigationProp<ParamListBase>>();
   const [showSecure, setShowSecure] = useState(false);
-  const textSeconday = useThemeColor("textSeconday");
   const loginMutation = useLoginMutation();
   const store = useStore();
 
@@ -116,7 +114,7 @@ const Login = () => {
           onSubmit={handleSubmit}
         />
 
-        <Typography style={{ textAlign: "center", color: textSeconday }}>
+        <Typography color='gray' style={{ textAlign: "center" }}>
           ------------ OR ------------
         </Typography>
 

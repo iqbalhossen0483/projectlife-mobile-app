@@ -1,3 +1,4 @@
+import { Colors } from "@/constants/Colors";
 import { useThemeColor } from "@/hooks/useThemeColor";
 import { NavigationProp, ParamListBase } from "@react-navigation/native";
 import { useNavigation } from "expo-router";
@@ -19,6 +20,7 @@ interface RippleButtonProps {
   variant?: "containd" | "outline" | "text";
   ripple?: boolean;
   disabled?: boolean;
+  bgColor?: keyof typeof Colors.light;
 }
 
 type Button = React.FC<RippleButtonProps>;
@@ -31,14 +33,15 @@ const RippleButton: Button = ({
   variant,
   ripple = true,
   disabled,
+  bgColor = "primary",
 }) => {
   const navigation = useNavigation<NavigationProp<ParamListBase>>();
   const disabledColor = useThemeColor("disabled");
-  const bgColor = useThemeColor("primary");
+  const backgroundgColor = useThemeColor(bgColor);
   const scaleValue = new Animated.Value(0);
-  const backgroundColor = disabled ? disabledColor : bgColor;
+  const backgroundColor = disabled ? disabledColor : backgroundgColor;
 
-  const lighterColor = lightenColor(bgColor, 20);
+  const lighterColor = lightenColor(backgroundgColor, 20);
 
   const handlePressIn = () => {
     if (Platform.OS === "ios") {
@@ -99,6 +102,7 @@ const RippleButton: Button = ({
               backgroundColor: lighterColor,
               transform: [{ scale: scaleValue }],
             },
+            style,
           ]}
         />
       )}

@@ -4,17 +4,24 @@ import { Pressable, View } from "react-native";
 import { Typography } from "./Typography";
 
 interface Props {
-  options: [string];
+  options: string[];
   value: string;
   onChange: React.Dispatch<React.SetStateAction<string>>;
+  direction?: "column" | "row";
 }
 
-const Select = ({ options, value, onChange }: Props) => {
+const Select = ({ options, value, onChange, direction = "row" }: Props) => {
   const placeHolderColor = useThemeColor("placeholder");
   const primaryColor = useThemeColor("primary");
 
   return (
-    <View style={{ flexDirection: "row", alignItems: "center", gap: 30 }}>
+    <View
+      style={{
+        flexDirection: direction,
+        alignItems: direction === "row" ? "center" : "flex-start",
+        gap: direction === "row" ? 30 : 10,
+      }}
+    >
       {options.map((item) => (
         <Pressable
           style={{ flexDirection: "row", alignItems: "center", gap: 10 }}

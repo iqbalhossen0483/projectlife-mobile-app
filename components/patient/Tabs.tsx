@@ -51,7 +51,7 @@ const Tabs = ({ tab, onChange }: Props) => {
           {routes.map((item, i) => (
             <Pressable onPress={() => onChange(item.name)} key={i}>
               <Typography
-                color={tab === item.name ? "primary" : "text"}
+                color={tab === item.name ? "primary" : "textSeconday"}
                 style={{ fontWeight: "500" }}
               >
                 {item.name}
