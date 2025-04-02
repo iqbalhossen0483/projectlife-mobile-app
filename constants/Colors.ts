@@ -14,8 +14,8 @@ export const Colors = {
     background: "#fff",
     cardBackground: "#ffffff",
     shadow: "#bfbdbd",
+    text: "#7D8491",
 
-    text: "#11181C",
     tint: tintColorLight,
     icon: "#687076",
     tabIconDefault: "#687076",
@@ -34,8 +34,8 @@ export const Colors = {
     background: "#151718",
     cardBackground: "#3a4042",
     shadow: "#ffffff",
+    text: "#7D8491",
 
-    text: "#ECEDEE",
     tint: tintColorDark,
     icon: "#9BA1A6",
     tabIconDefault: "#9BA1A6",

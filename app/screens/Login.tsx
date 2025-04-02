@@ -25,7 +25,6 @@ interface LoginPayload {
 
 const Login = () => {
   const navigation = useNavigation<NavigationProp<ParamListBase>>();
-  const placeholderColor = useThemeColor("placeholder");
   const [showSecure, setShowSecure] = useState(false);
   const textSeconday = useThemeColor("textSeconday");
   const loginMutation = useLoginMutation();

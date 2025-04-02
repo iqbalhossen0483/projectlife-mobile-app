@@ -1,12 +1,16 @@
-import { Box } from "@/components/utils/Box";
+import Tabs from "@/components/patient/Tabs";
 import { Typography } from "@/components/utils/Typography";
-import React from "react";
+import React, { useState } from "react";
+import { View } from "react-native";
 
 const Patients = () => {
+  const [tab, setTab] = useState("All Patients");
+
   return (
-    <Box>
+    <View>
+      <Tabs tab={tab} onChange={setTab} />
       <Typography>Patient</Typography>
-    </Box>
+    </View>
   );
 };
 
