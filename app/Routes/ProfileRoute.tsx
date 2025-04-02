@@ -19,7 +19,7 @@ const ProfileRoute = () => {
       screenOptions={({ navigation }) => ({
         header: ({ route }) => {
           if (route.name === routes.home_layout) {
-            return <MainHeader navigation={navigation} title={route.name} />;
+            return <MainHeader navigation={navigation} />;
           } else return null;
         },
         drawerStyle: { backgroundColor, width: "70%" },
