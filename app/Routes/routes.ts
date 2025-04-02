@@ -12,6 +12,9 @@ export const routes = {
   patients: "patients",
   round: "round",
   account: "account",
+  wards: "wards",
+  staff: "staff",
+  export_data: "export_data",
 };
 
 export default routes;
