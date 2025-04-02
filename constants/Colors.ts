@@ -11,15 +11,14 @@ export const Colors = {
     border: "#E1EFF8",
     backDrop: "#2B25274D",
     background: "#fff",
+    cardBackground: "#ffffff",
+    shadow: "#bfbdbd",
 
     text: "#11181C",
-    cardBackground: "#ffffff",
     tint: tintColorLight,
     icon: "#687076",
     tabIconDefault: "#687076",
     tabIconSelected: tintColorLight,
-    shadow: "#000",
-
     error: "#ed6464",
   },
   dark: {
@@ -31,14 +30,14 @@ export const Colors = {
     border: "#E1EFF8",
     backDrop: "#2B25274D",
     background: "#151718",
+    cardBackground: "#3a4042",
+    shadow: "#ffffff",
 
     text: "#ECEDEE",
-    cardBackground: "#3a4042",
     tint: tintColorDark,
     icon: "#9BA1A6",
     tabIconDefault: "#9BA1A6",
     tabIconSelected: tintColorDark,
-    shadow: "#ffffff",
 
     error: "#ed6464",
   },
