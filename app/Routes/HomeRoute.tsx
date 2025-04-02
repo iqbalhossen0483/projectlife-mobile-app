@@ -13,7 +13,10 @@ const HomeRoute = () => {
   return (
     <Tab.Navigator
       initialRouteName={routes.home}
-      screenOptions={{ headerShown: false }}
+      screenOptions={{
+        headerShown: false,
+        sceneStyle: { paddingBottom: 48 },
+      }}
       tabBar={(props) => <TabBottomNavigation {...props} />}
     >
       <Tab.Screen name={routes.home} component={Home} />
