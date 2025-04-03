@@ -1,7 +1,9 @@
 import { useThemeColor } from "@/hooks/useThemeColor";
 import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
-import React from "react";
-import { View } from "react-native";
+import { Image } from "expo-image";
+import React, { useState } from "react";
+import { Pressable, StyleSheet, TouchableHighlight, View } from "react-native";
+import BottomModal from "../common/BottomModal";
 import Pragnent from "../icons/Pragnent";
 import RippleButton from "../utils/Button";
 import Card from "../utils/Card";
@@ -36,6 +38,7 @@ const data = [
 ];
 
 const PatientCard = () => {
+  const [isVisible, setIsVisible] = useState(false);
   const placeholderColor = useThemeColor("placeholder");
   const grayColor = useThemeColor("lightGray");
   const primaryColor = useThemeColor("primary");
@@ -45,23 +48,19 @@ const PatientCard = () => {
   return (
     <Card>
       <View style={{ width: "100%", gap: 5 }}>
-        <View
-          style={{
-            flexDirection: "row",
-            alignItems: "center",
-            justifyContent: "space-between",
-          }}
-        >
+        <View style={styles.header}>
           <Typography style={{ fontWeight: 500, fontSize: 18 }}>
             Dipti Thakur
           </Typography>
           <View style={{ flexDirection: "row", alignItems: "center" }}>
             <Ionicons name='flag-sharp' size={18} color={placeholderColor} />
-            <MaterialCommunityIcons
-              name='dots-vertical'
-              size={24}
-              color={placeholderColor}
-            />
+            <Pressable onPress={() => setIsVisible(true)}>
+              <MaterialCommunityIcons
+                name='dots-vertical'
+                size={24}
+                color={placeholderColor}
+              />
+            </Pressable>
           </View>
         </View>
         <Typography style={{ fontSize: 14, fontWeight: 500 }}>
@@ -112,20 +111,10 @@ const PatientCard = () => {
         </View>
 
         <View
-          style={{
-            flexDirection: "row",
-            alignItems: "center",
-            justifyContent: "space-between",
-            gap: 5,
-            backgroundColor: grayColor,
-            borderRadius: 10,
-            paddingHorizontal: 10,
-            paddingTop: 10,
-            paddingBottom: 15,
-            borderWidth: 1,
-            borderColor: borderColor,
-            marginTop: 10,
-          }}
+          style={[
+            styles.analysisWrapper,
+            { backgroundColor: grayColor, borderColor: borderColor },
+          ]}
         >
           {data.map((item, i) => (
             <View key={i} style={{ alignItems: "center" }}>
@@ -135,10 +124,7 @@ const PatientCard = () => {
               >
                 {item.score}
               </Typography>
-              <Typography
-                color='textBlue'
-                style={{ fontWeight: 500, fontSize: 17 }}
-              >
+              <Typography color='textBlue' style={{ fontWeight: 500 }}>
                 {item.title}
               </Typography>
             </View>
@@ -147,17 +133,11 @@ const PatientCard = () => {
         <RippleButton
           variant='outline'
           ripple={false}
-          style={{
-            width: 120,
-            height: "auto",
-            flexDirection: "row",
-            alignItems: "center",
-            alignSelf: "center",
-            marginTop: -15,
-            backgroundColor: primaryLight,
-          }}
+          style={{ ...styles.viewLgcBtn, backgroundColor: primaryLight }}
         >
-          <Typography color='primary'>View LCG </Typography>
+          <Typography color='primary' style={{ fontSize: 14 }}>
+            View LCG
+          </Typography>
           <MaterialCommunityIcons
             name='chevron-double-right'
             size={20}
@@ -165,20 +145,116 @@ const PatientCard = () => {
           />
         </RippleButton>
 
-        <RippleButton
-          style={{
-            width: "auto",
-            height: "auto",
-            paddingVertical: 7,
-            borderRadius: 12,
-            marginTop: 10,
-          }}
-        >
+        <RippleButton style={styles.addBtn}>
           <Typography color='white'>Add Plan</Typography>
         </RippleButton>
       </View>
+      <Menus isVisible={isVisible} setIsVisible={setIsVisible} />
     </Card>
   );
 };
+
+const menus = [
+  {
+    title: "Assign Ward",
+    Icon: (
+      <Image
+        style={{ height: 24, width: 24 }}
+        source={require("../../assets/icons/patients.svg")}
+      />
+    ),
+  },
+  {
+    title: "Patient Actions",
+    Icon: (
+      <Image
+        style={{ height: 24, width: 24 }}
+        source={require("../../assets/icons/medical-records.svg")}
+      />
+    ),
+  },
+  {
+    title: "Edit Patient Details",
+    Icon: (
+      <Image
+        style={{ height: 24, width: 24 }}
+        source={require("../../assets/icons/edit.svg")}
+      />
+    ),
+  },
+];
+
+interface Props {
+  isVisible: boolean;
+  setIsVisible: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+function Menus({ isVisible, setIsVisible }: Props) {
+  const primaryLight = useThemeColor("primary-light");
+
+  function handleClose() {
+    setIsVisible(false);
+  }
+  return (
+    <BottomModal isVisible={isVisible} handleClose={handleClose}>
+      <View style={{ marginTop: 10 }}>
+        {menus.map((item, i) => (
+          <TouchableHighlight
+            onPress={() => console.log("clicked")}
+            underlayColor={primaryLight}
+            key={i}
+          >
+            <View style={styles.menu}>
+              {item.Icon}
+              <Typography>{item.title}</Typography>
+            </View>
+          </TouchableHighlight>
+        ))}
+      </View>
+    </BottomModal>
+  );
+}
+
+const styles = StyleSheet.create({
+  header: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+  },
+  analysisWrapper: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    gap: 5,
+    borderRadius: 10,
+    paddingHorizontal: 10,
+    paddingTop: 10,
+    paddingBottom: 15,
+    borderWidth: 1,
+    marginTop: 10,
+  },
+  viewLgcBtn: {
+    width: 120,
+    height: "auto",
+    flexDirection: "row",
+    alignItems: "center",
+    alignSelf: "center",
+    marginTop: -15,
+  },
+  addBtn: {
+    width: "auto",
+    height: "auto",
+    paddingVertical: 7,
+    borderRadius: 12,
+    marginTop: 10,
+  },
+  menu: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 10,
+    paddingVertical: 10,
+    paddingHorizontal: 10,
+  },
+});
 
 export default PatientCard;
