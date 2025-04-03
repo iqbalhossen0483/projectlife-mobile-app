@@ -1,5 +1,6 @@
 import { createStackNavigator } from "@react-navigation/stack";
 import React from "react";
+import AssignWard from "../screens/AssignWard";
 import ExportData from "../screens/ExportData";
 import ForgetPassword from "../screens/ForgetPassword";
 import Loading from "../screens/Loading";
@@ -37,6 +38,8 @@ const MainRoute = () => {
       <Stack.Screen name={routes.staff} component={Staff} />
       <Stack.Screen name={routes.export_data} component={ExportData} />
       {/* Account pages end */}
+
+      <Stack.Screen name={routes.assign_ward} component={AssignWard} />
     </Stack.Navigator>
   );
 };

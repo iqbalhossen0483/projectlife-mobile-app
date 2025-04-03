@@ -15,6 +15,7 @@ export const routes = {
   wards: "wards",
   staff: "staff",
   export_data: "export_data",
+  assign_ward: "assign_ward",
 };
 
 export default routes;

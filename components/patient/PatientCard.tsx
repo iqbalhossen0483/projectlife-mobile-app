@@ -1,12 +1,17 @@
+import routes from "@/app/Routes/routes";
 import { useThemeColor } from "@/hooks/useThemeColor";
 import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Image } from "expo-image";
 import React, { useState } from "react";
-import { Pressable, StyleSheet, TouchableHighlight, View } from "react-native";
+import { Pressable, StyleSheet, View } from "react-native";
 import BottomModal from "../common/BottomModal";
+import MiddleModal from "../common/MiddleModal";
 import Pragnent from "../icons/Pragnent";
 import RippleButton from "../utils/Button";
 import Card from "../utils/Card";
+import CheckBox from "../utils/CheckBox";
+import Link from "../utils/Link";
 import { Typography } from "../utils/Typography";
 
 const data = [
@@ -38,12 +43,26 @@ const data = [
 ];
 
 const PatientCard = () => {
-  const [isVisible, setIsVisible] = useState(false);
+  const [showMenus, setShowMenus] = useState(false);
+  const [showAlert, setShowAlert] = useState(false);
   const placeholderColor = useThemeColor("placeholder");
   const grayColor = useThemeColor("lightGray");
   const primaryColor = useThemeColor("primary");
   const borderColor = useThemeColor("border");
   const primaryLight = useThemeColor("primary-light");
+
+  async function handleAlert() {
+    const alert = await AsyncStorage.getItem("show_patient_risk_alert");
+    if (alert === "true") {
+      setShowAlert(true);
+      return;
+    }
+    console.log("okay", alert);
+  }
+
+  function handAddRisk() {
+    if (showAlert) setShowAlert(false);
+  }
 
   return (
     <Card>
@@ -53,8 +72,10 @@ const PatientCard = () => {
             Dipti Thakur
           </Typography>
           <View style={{ flexDirection: "row", alignItems: "center" }}>
-            <Ionicons name='flag-sharp' size={18} color={placeholderColor} />
-            <Pressable onPress={() => setIsVisible(true)}>
+            <Pressable onPress={handleAlert}>
+              <Ionicons name='flag-sharp' size={18} color={placeholderColor} />
+            </Pressable>
+            <Pressable onPress={() => setShowMenus(true)}>
               <MaterialCommunityIcons
                 name='dots-vertical'
                 size={24}
@@ -149,7 +170,12 @@ const PatientCard = () => {
           <Typography color='white'>Add Plan</Typography>
         </RippleButton>
       </View>
-      <Menus isVisible={isVisible} setIsVisible={setIsVisible} />
+      <Menus isVisible={showMenus} cardId='1' setIsVisible={setShowMenus} />
+      <Alert
+        isVisible={showAlert}
+        setIsVisible={setShowAlert}
+        onSucess={handAddRisk}
+      />
     </Card>
   );
 };
@@ -157,6 +183,7 @@ const PatientCard = () => {
 const menus = [
   {
     title: "Assign Ward",
+    route: routes.assign_ward,
     Icon: (
       <Image
         style={{ height: 24, width: 24 }}
@@ -166,6 +193,7 @@ const menus = [
   },
   {
     title: "Patient Actions",
+    route: routes.assign_ward,
     Icon: (
       <Image
         style={{ height: 24, width: 24 }}
@@ -175,6 +203,7 @@ const menus = [
   },
   {
     title: "Edit Patient Details",
+    route: routes.assign_ward,
     Icon: (
       <Image
         style={{ height: 24, width: 24 }}
@@ -187,31 +216,85 @@ const menus = [
 interface Props {
   isVisible: boolean;
   setIsVisible: React.Dispatch<React.SetStateAction<boolean>>;
+  cardId?: string;
+  onSucess?: () => void;
 }
 
-function Menus({ isVisible, setIsVisible }: Props) {
-  const primaryLight = useThemeColor("primary-light");
-
+function Menus({ isVisible, setIsVisible, cardId }: Props) {
   function handleClose() {
     setIsVisible(false);
   }
+
   return (
     <BottomModal isVisible={isVisible} handleClose={handleClose}>
       <View style={{ marginTop: 10 }}>
         {menus.map((item, i) => (
-          <TouchableHighlight
-            onPress={() => console.log("clicked")}
-            underlayColor={primaryLight}
+          <Link
+            onPress={handleClose}
+            href={item.route as any}
+            params={{ cardId }}
             key={i}
           >
             <View style={styles.menu}>
               {item.Icon}
               <Typography>{item.title}</Typography>
             </View>
-          </TouchableHighlight>
+          </Link>
         ))}
       </View>
     </BottomModal>
+  );
+}
+
+function Alert({ isVisible, setIsVisible, onSucess }: Props) {
+  const [checked, setChecked] = useState(false);
+  function handleClose() {
+    setIsVisible(false);
+  }
+
+  async function handleCheck(value: boolean) {
+    setChecked(value);
+    AsyncStorage.setItem("show_patient_risk_alert", `${value}`);
+  }
+
+  return (
+    <MiddleModal
+      animationIn='wobble'
+      isVisible={isVisible}
+      handleClose={handleClose}
+    >
+      <View style={{ alignItems: "center", gap: 20 }}>
+        <Image
+          style={{ height: 32, width: 37 }}
+          source={require("../../assets/icons/alert.svg")}
+        />
+        <Typography
+          style={{ fontSize: 20, fontWeight: 500, textAlign: "center" }}
+        >
+          Are you sure to mark this patient at high risk?
+        </Typography>
+
+        <CheckBox checked={checked} onChange={handleCheck}>
+          <Typography style={{ fontSize: 18, fontWeight: 500 }}>
+            Hide this alert in future
+          </Typography>
+        </CheckBox>
+        <View
+          style={{ flexDirection: "row", alignItems: "center", gap: "10%" }}
+        >
+          <RippleButton
+            onPress={handleClose}
+            style={{ flex: 1 }}
+            variant='outline'
+          >
+            <Typography color='primary'>No</Typography>
+          </RippleButton>
+          <RippleButton onPress={onSucess} style={{ flex: 1 }}>
+            <Typography color='white'>Yes</Typography>
+          </RippleButton>
+        </View>
+      </View>
+    </MiddleModal>
   );
 }
 
