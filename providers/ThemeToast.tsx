@@ -1,88 +1,70 @@
-import { Box } from "@/components/utils/Box";
+import MiddleModal from "@/components/common/MiddleModal";
 import RippleButton from "@/components/utils/Button";
-import Card from "@/components/utils/Card";
 import { Typography } from "@/components/utils/Typography";
 import useStore from "@/hooks/useStore";
 import { useThemeColor } from "@/hooks/useThemeColor";
-import Ionicons from "@expo/vector-icons/Ionicons";
+import { MaterialIcons } from "@expo/vector-icons";
+import { Image } from "expo-image";
 import { useEffect } from "react";
-import { Pressable, StyleSheet } from "react-native";
+import { View } from "react-native";
 
 export const ThemedToast = () => {
-  const backDropColor = useThemeColor("backDrop");
-  const primaryColor = useThemeColor("primary");
+  const successColor = useThemeColor("success");
   const store = useStore();
 
   function handleClose() {
-    store?.setToastMessage({ title: null, description: null });
+    store?.setToastMessage({ type: null, message: null });
     if (store?.toastMessage.onFinished) {
       store.toastMessage.onFinished();
     }
   }
 
   useEffect(() => {
-    if (store?.toastMessage.description) {
+    if (store?.toastMessage.message) {
       const timer = setTimeout(() => {
-        store?.setToastMessage({ title: null, description: null });
-      }, 3000);
+        store?.setToastMessage({ type: null, message: null });
+      }, 5000);
 
       return () => clearTimeout(timer);
     }
-  }, [store?.toastMessage.description]);
+  }, [store?.toastMessage.message]);
 
-  if (!store?.toastMessage.description) return null;
+  if (!store?.toastMessage.message) return null;
 
-  const description = store.toastMessage.description;
-  const title = store.toastMessage.title;
+  const description = store.toastMessage.message;
+  const type = store.toastMessage.type;
+  const icon = store.toastMessage.icon;
 
   return (
-    <Box style={[{ backgroundColor: backDropColor }, styles.container]}>
-      <Card style={styles.card}>
-        <Pressable onPress={handleClose} style={styles.closeIcon}>
-          <Ionicons name='close' size={28} style={{ color: primaryColor }} />
-        </Pressable>
-        {typeof title === "string" ? (
-          <Typography style={{ fontWeight: 500, fontSize: 18 }}>
-            {title}
-          </Typography>
-        ) : (
-          title
+    <MiddleModal
+      animationIn={type === "failed" ? "wobble" : "zoomIn"}
+      isVisible={!!description}
+      handleClose={handleClose}
+    >
+      <View style={{ alignItems: "center" }}>
+        {icon && icon}
+        {type === "success" && (
+          <MaterialIcons name='check-circle' size={50} color={successColor} />
+        )}
+        {type === "failed" && (
+          <Image
+            style={{ height: 40, width: 40 }}
+            contentFit='contain'
+            source={require("../assets/icons/alert.svg")}
+          />
         )}
 
-        <Typography>{description}</Typography>
+        <Typography style={{ fontWeight: 500, marginTop: 5 }}>
+          {description}
+        </Typography>
 
-        <RippleButton onPress={handleClose} style={{ width: 100 }}>
+        <RippleButton
+          onPress={handleClose}
+          style={{ width: 100, marginTop: 20 }}
+        >
           <Typography color='white'>Ok</Typography>
         </RippleButton>
-      </Card>
-    </Box>
+      </View>
+    </MiddleModal>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    height: "auto",
-    width: "auto",
-    position: "absolute",
-    top: 0,
-    left: 0,
-    bottom: 0,
-    right: 0,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  card: {
-    width: "80%",
-    minHeight: 200,
-    paddingTop: 25,
-    paddingBottom: 15,
-    paddingHorizontal: 15,
-    justifyContent: "space-between",
-    rowGap: 10,
-  },
-  closeIcon: {
-    position: "absolute",
-    top: 8,
-    right: 8,
-  },
-});

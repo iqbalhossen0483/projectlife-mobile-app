@@ -31,11 +31,11 @@ const Profile = () => {
       data.country_code = code;
       await http.put("/auth/update", data);
       store?.setToastMessage({
-        title: "Success",
-        description: "Profile updated successfully",
+        type: "success",
+        message: "Profile updated successfully",
       });
     } catch (error: any) {
-      store?.setToastMessage({ title: "Failed", description: error.message });
+      store?.setToastMessage({ type: "failed", message: error.message });
     }
   }
 

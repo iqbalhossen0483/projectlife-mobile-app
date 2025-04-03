@@ -15,14 +15,15 @@ const ForgetPassword = () => {
     console.log({ email: value });
 
     store?.setToastMessage({
-      title: (
+      icon: (
         <Image
           style={{ width: 40, height: 40 }}
           contentFit='contain'
           source={require("../../assets/icons/lock-icon.svg")}
         />
       ),
-      description: "We have sent you an Otp to Reset Your Password",
+      message: "We have sent you an Otp to Reset Your Password",
+      type: null,
     });
   }
 

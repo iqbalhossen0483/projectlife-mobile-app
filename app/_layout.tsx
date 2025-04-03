@@ -12,7 +12,6 @@ import { useColorScheme } from "@/hooks/useColorScheme";
 import QueryProvider from "@/providers/QueryProvider";
 
 import StoreProvider from "@/providers/StoreProvider";
-import { ThemedToast } from "@/providers/ThemeToast";
 import { StatusBar } from "expo-status-bar";
 import { SafeAreaView } from "react-native";
 import MainRoute from "./Routes/MainRoute";
@@ -44,7 +43,6 @@ export default function RootLayout() {
           <SafeAreaView style={{ flex: 1 }}>
             <StatusBar style={colorScheme === "dark" ? "light" : "dark"} />
             <MainRoute />
-            <ThemedToast />
           </SafeAreaView>
         </ThemeProvider>
       </StoreProvider>

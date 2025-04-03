@@ -1,6 +1,7 @@
 import { Box } from "@/components/utils/Box";
 import { Typography } from "@/components/utils/Typography";
 import { useThemeColor } from "@/hooks/useThemeColor";
+import { ThemedToast } from "@/providers/ThemeToast";
 import Entypo from "@expo/vector-icons/Entypo";
 import {
   NavigationProp,
@@ -82,6 +83,7 @@ const SecondaryLayout = ({ children, header = true, title }: Props) => {
           </ScrollView>
         </TouchableWithoutFeedback>
       </KeyboardAvoidingView>
+      <ThemedToast />
     </Box>
   );
 };

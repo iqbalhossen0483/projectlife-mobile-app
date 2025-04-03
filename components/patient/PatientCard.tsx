@@ -1,4 +1,5 @@
 import routes from "@/app/Routes/routes";
+import useStore from "@/hooks/useStore";
 import { useThemeColor } from "@/hooks/useThemeColor";
 import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -50,6 +51,7 @@ const PatientCard = () => {
   const primaryColor = useThemeColor("primary");
   const borderColor = useThemeColor("border");
   const primaryLight = useThemeColor("primary-light");
+  const store = useStore();
 
   async function handleAlert() {
     const alert = await AsyncStorage.getItem("show_patient_risk_alert");
@@ -57,7 +59,10 @@ const PatientCard = () => {
       setShowAlert(true);
       return;
     }
-    console.log("okay", alert);
+    store?.setToastMessage({
+      type: "success",
+      message: "Patient added to as risk",
+    });
   }
 
   function handAddRisk() {

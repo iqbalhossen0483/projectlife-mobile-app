@@ -30,7 +30,7 @@ const LoginWithOTP = () => {
       console.log(payload);
       navigation.navigate(routes.otp, { auth_type });
     } catch (error: any) {
-      store?.setToastMessage({ title: "Failed", description: error.message });
+      store?.setToastMessage({ type: "failed", message: error.message });
     }
   }
   return (

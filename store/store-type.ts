@@ -24,8 +24,9 @@ export interface User {
 }
 
 export interface ToastMessage {
-  title: string | React.ReactNode | null;
-  description: string | null;
+  type: "success" | "failed" | null;
+  message: string | null;
+  icon?: React.ReactNode;
   onFinished?: () => void;
 }
 

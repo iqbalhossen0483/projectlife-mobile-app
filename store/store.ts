@@ -12,8 +12,8 @@ const Store: StoreFn = () => {
   const [userLoading, setUserLoading] = useState(false);
   const [user, setUser] = useState<User | null>(null);
   const [toastMessage, setToastMessage] = useState<ToastMessage>({
-    title: null,
-    description: null,
+    type: null,
+    message: null,
     onFinished: undefined,
   });
   const navigation = useNavigation<NavigationProp<ParamListBase>>();
@@ -24,7 +24,7 @@ const Store: StoreFn = () => {
         setUserLoading(true);
         const { data } = await http.get("/auth/me");
         setUser(data);
-        // navigation.navigate(routes.profile_layout);
+        navigation.navigate(routes.profile_layout);
       } catch (error) {
         console.log(error);
         navigation.navigate(routes.login);

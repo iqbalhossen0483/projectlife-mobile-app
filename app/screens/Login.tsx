@@ -32,8 +32,8 @@ const Login = () => {
     loginMutation.mutate(payload, {
       onSuccess: (data) => {
         store?.setToastMessage({
-          title: "Success",
-          description: "Logged in successfully",
+          type: "success",
+          message: "Logged in successfully",
           onFinished: () => {
             navigation.navigate(routes.home);
           },
@@ -43,8 +43,8 @@ const Login = () => {
       },
       onError: (error) => {
         store?.setToastMessage({
-          title: "Failed",
-          description: error.message || "Something went wrong",
+          type: "failed",
+          message: error.message || "Something went wrong",
         });
       },
     });
