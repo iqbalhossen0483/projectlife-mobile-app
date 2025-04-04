@@ -1,5 +1,6 @@
 import { Box } from "@/components/utils/Box";
 import { Typography } from "@/components/utils/Typography";
+import { Colors } from "@/constants/Colors";
 import { useThemeColor } from "@/hooks/useThemeColor";
 import { ThemedToast } from "@/providers/ThemeToast";
 import Entypo from "@expo/vector-icons/Entypo";
@@ -24,19 +25,25 @@ interface Props {
   children: React.ReactNode;
   header?: boolean;
   title?: string;
+  bgColor?: keyof typeof Colors.light;
 }
 
-const SecondaryLayout = ({ children, header = true, title }: Props) => {
+const SecondaryLayout = ({
+  children,
+  header = true,
+  title,
+  bgColor = "background",
+}: Props) => {
   const navigation = useNavigation<NavigationProp<ParamListBase>>();
+  const backgroundColor = useThemeColor("background");
+  const backDropColor = useThemeColor(bgColor);
   const primaryColor = useThemeColor("primary");
   const boderColor = useThemeColor("border");
-  const backgroundColor = useThemeColor("background");
 
   return (
-    <Box
+    <View
       style={{
         minHeight: Dimensions.get("screen").height - 15,
-        paddingHorizontal: 10,
         paddingTop: 40,
         backgroundColor,
       }}
@@ -50,6 +57,7 @@ const SecondaryLayout = ({ children, header = true, title }: Props) => {
             paddingLeft: 2,
             flexDirection: "row",
             alignItems: "center",
+            paddingHorizontal: 10,
           }}
         >
           <Pressable onPress={() => navigation.goBack()}>
@@ -78,13 +86,24 @@ const SecondaryLayout = ({ children, header = true, title }: Props) => {
         style={{ flex: 1 }}
       >
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-          <ScrollView style={{ flex: 1 }} keyboardShouldPersistTaps='handled'>
-            <View>{children}</View>
+          <ScrollView
+            contentContainerStyle={{ flexGrow: 1 }}
+            keyboardShouldPersistTaps='handled'
+          >
+            <View
+              style={{
+                padding: 10,
+                backgroundColor: backDropColor,
+                height: "100%",
+              }}
+            >
+              {children}
+            </View>
           </ScrollView>
         </TouchableWithoutFeedback>
       </KeyboardAvoidingView>
       <ThemedToast />
-    </Box>
+    </View>
   );
 };
 

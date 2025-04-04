@@ -13,9 +13,10 @@ import { Typography } from "../utils/Typography";
 interface Props {
   value: string;
   onChange: React.Dispatch<React.SetStateAction<string>>;
+  filter?: boolean;
 }
 
-const SearchAndFilter = ({ value, onChange }: Props) => {
+const SearchAndFilter = ({ value, onChange, filter = true }: Props) => {
   const placeholderColor = useThemeColor("placeholder");
   const primaryColor = useThemeColor("primary");
   const [isVisible, setIsVisible] = useState(false);
@@ -45,53 +46,57 @@ const SearchAndFilter = ({ value, onChange }: Props) => {
           />
         </View>
       </Card>
-      <Pressable onPress={() => setIsVisible(true)}>
-        <Card style={{ paddingVertical: 12 }}>
-          <Image
-            style={{ height: 16, width: 27 }}
-            source={require("../../assets/icons/filter.svg")}
-          />
-        </Card>
-      </Pressable>
+      {filter && (
+        <>
+          <Pressable onPress={() => setIsVisible(true)}>
+            <Card style={{ paddingVertical: 12 }}>
+              <Image
+                style={{ height: 16, width: 27 }}
+                source={require("../../assets/icons/filter.svg")}
+              />
+            </Card>
+          </Pressable>
 
-      {/* filter modal */}
-      <BottomModal isVisible={isVisible} handleClose={handleCloseModal}>
-        <Typography
-          style={{ fontWeight: 500, fontSize: 18, textAlign: "left" }}
-        >
-          Sort By
-        </Typography>
+          {/* filter modal */}
+          <BottomModal isVisible={isVisible} handleClose={handleCloseModal}>
+            <Typography
+              style={{ fontWeight: 500, fontSize: 18, textAlign: "left" }}
+            >
+              Sort By
+            </Typography>
 
-        <View style={{ marginVertical: 20, marginLeft: 10 }}>
-          <Select
-            options={["Patient Name", "UHID"]}
-            value={sortBy}
-            onChange={setSortBy}
-            direction='column'
-          />
-        </View>
+            <View style={{ marginVertical: 20, marginLeft: 10 }}>
+              <Select
+                options={["Patient Name", "UHID"]}
+                value={sortBy}
+                onChange={setSortBy}
+                direction='column'
+              />
+            </View>
 
-        <View style={{ flexDirection: "row" }}>
-          <RippleButton
-            style={{
-              flex: 1,
-              borderRadius: 0,
-              borderColor: primaryColor,
-            }}
-            onPress={() => setSortBy("Patient Name")}
-            variant='outline'
-            bgColor='primary-light'
-          >
-            <Typography color='primary'>Reset</Typography>
-          </RippleButton>
-          <RippleButton
-            onPress={handleSort}
-            style={{ flex: 1, borderRadius: 0 }}
-          >
-            <Typography color='white'>Apply</Typography>
-          </RippleButton>
-        </View>
-      </BottomModal>
+            <View style={{ flexDirection: "row" }}>
+              <RippleButton
+                style={{
+                  flex: 1,
+                  borderRadius: 0,
+                  borderColor: primaryColor,
+                }}
+                onPress={() => setSortBy("Patient Name")}
+                variant='outline'
+                bgColor='primary-light'
+              >
+                <Typography color='primary'>Reset</Typography>
+              </RippleButton>
+              <RippleButton
+                onPress={handleSort}
+                style={{ flex: 1, borderRadius: 0 }}
+              >
+                <Typography color='white'>Apply</Typography>
+              </RippleButton>
+            </View>
+          </BottomModal>
+        </>
+      )}
     </View>
   );
 };
