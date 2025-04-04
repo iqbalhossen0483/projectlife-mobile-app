@@ -8,12 +8,18 @@ import { ScrollView, View } from "react-native";
 const Patients = () => {
   const [searchValue, setSearchValue] = useState("");
   const [tab, setTab] = useState("All Patients");
+  const [sortBy, setSortBy] = useState("Patient Name");
 
   return (
     <View>
       <Tabs tab={tab} onChange={setTab} />
       <ScrollView style={{ paddingHorizontal: 10 }}>
-        <SearchAndFilter value={searchValue} onChange={setSearchValue} />
+        <SearchAndFilter
+          sortBy={sortBy}
+          setSortBy={setSortBy}
+          value={searchValue}
+          onChange={setSearchValue}
+        />
         <Typography
           style={{ fontWeight: 500, fontSize: 17, marginVertical: 10 }}
         >

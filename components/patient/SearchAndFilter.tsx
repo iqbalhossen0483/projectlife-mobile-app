@@ -13,14 +13,14 @@ import { Typography } from "../utils/Typography";
 interface Props {
   value: string;
   onChange: React.Dispatch<React.SetStateAction<string>>;
-  filter?: boolean;
+  sortBy?: string;
+  setSortBy?: React.Dispatch<React.SetStateAction<string>>;
 }
 
-const SearchAndFilter = ({ value, onChange, filter = true }: Props) => {
+const SearchAndFilter = ({ value, onChange, sortBy, setSortBy }: Props) => {
   const placeholderColor = useThemeColor("placeholder");
   const primaryColor = useThemeColor("primary");
   const [isVisible, setIsVisible] = useState(false);
-  const [sortBy, setSortBy] = useState("Patient Name");
 
   function handleCloseModal() {
     setIsVisible(false);
@@ -46,7 +46,7 @@ const SearchAndFilter = ({ value, onChange, filter = true }: Props) => {
           />
         </View>
       </Card>
-      {filter && (
+      {sortBy && setSortBy && (
         <>
           <Pressable onPress={() => setIsVisible(true)}>
             <Card style={{ paddingVertical: 12 }}>

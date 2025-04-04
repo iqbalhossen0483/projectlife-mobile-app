@@ -28,6 +28,8 @@ const MiddleModal = ({
       onBackdropPress={handleClose}
       animationIn={animationIn}
       animationOut='zoomOut'
+      backdropTransitionOutTiming={0}
+      useNativeDriver
     >
       <View style={{ flex: 1 }}>
         <Card

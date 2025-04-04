@@ -2,7 +2,6 @@ import { Box } from "@/components/utils/Box";
 import { Typography } from "@/components/utils/Typography";
 import { Colors } from "@/constants/Colors";
 import { useThemeColor } from "@/hooks/useThemeColor";
-import { ThemedToast } from "@/providers/ThemeToast";
 import Entypo from "@expo/vector-icons/Entypo";
 import {
   NavigationProp,
@@ -19,6 +18,7 @@ import {
   ScrollView,
   TouchableWithoutFeedback,
   View,
+  ViewStyle,
 } from "react-native";
 
 interface Props {
@@ -26,6 +26,7 @@ interface Props {
   header?: boolean;
   title?: string;
   bgColor?: keyof typeof Colors.light;
+  style?: ViewStyle;
 }
 
 const SecondaryLayout = ({
@@ -33,6 +34,7 @@ const SecondaryLayout = ({
   header = true,
   title,
   bgColor = "background",
+  style = {},
 }: Props) => {
   const navigation = useNavigation<NavigationProp<ParamListBase>>();
   const backgroundColor = useThemeColor("background");
@@ -95,6 +97,7 @@ const SecondaryLayout = ({
                 padding: 10,
                 backgroundColor: backDropColor,
                 height: "100%",
+                ...style,
               }}
             >
               {children}
@@ -102,7 +105,6 @@ const SecondaryLayout = ({
           </ScrollView>
         </TouchableWithoutFeedback>
       </KeyboardAvoidingView>
-      <ThemedToast />
     </View>
   );
 };

@@ -13,6 +13,7 @@ export const routes = {
   round: "round",
   account: "account",
   wards: "wards",
+  ward_details: "ward_details",
   staff: "staff",
   export_data: "export_data",
   assign_ward: "assign_ward",

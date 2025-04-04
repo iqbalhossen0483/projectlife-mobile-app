@@ -8,6 +8,7 @@ import Login from "../screens/Login";
 import LoginWithOTP from "../screens/LoginWithOTP";
 import OTP from "../screens/OTP";
 import Staff from "../screens/Staff";
+import WardDetails from "../screens/WardDetails";
 import Wards from "../screens/Wards";
 import ProfileRoute from "./ProfileRoute";
 import { routes } from "./routes";
@@ -35,6 +36,7 @@ const MainRoute = () => {
 
       {/* Account pages start */}
       <Stack.Screen name={routes.wards} component={Wards} />
+      <Stack.Screen name={routes.ward_details} component={WardDetails} />
       <Stack.Screen name={routes.staff} component={Staff} />
       <Stack.Screen name={routes.export_data} component={ExportData} />
       {/* Account pages end */}
